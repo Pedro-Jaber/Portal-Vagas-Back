@@ -4,7 +4,9 @@
   "description": "Esse é o repositório para o Backend do projeto Portal Vagas",
   "main": "index.js",
   "scripts": {
-    "start": ""
+    "start": "",
+    "lint:check": "prettier --check .",
+    "lint:fix": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -27,5 +29,8 @@
     "method-override": "^3.0.0",
     "sequelize": "^6.33.0",
     "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3"
   }
 }
