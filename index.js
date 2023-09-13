@@ -9,12 +9,12 @@ const PORT = 8081;
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("Página em construção");
+  res.status(200).render("paginaEmConstrucao");
 });
 
 // Error 404 Page
 app.get("*", (req, res) => {
-  res.send("404");
+  res.status(404).send("404");
 });
 
 // App Listen
