@@ -12,6 +12,11 @@ app.get("/", (req, res) => {
   res.send("Página em construção");
 });
 
+// Error 404 Page
+app.get("*", (req, res) => {
+  res.send("404");
+});
+
 // App Listen
 app.listen(PORT, () => {
   console.log("=~=~=~=~=~=~=~=~=~=~=~=~=~=");
