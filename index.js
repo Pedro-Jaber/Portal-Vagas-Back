@@ -1,15 +1,24 @@
 const express = require("express");
+const expressLayouts = require("express-ejs-layouts");
 
 const app = express();
 const PORT = 8081;
 
 // middleware
+app.use(express.static("public"));
+
+// view engine
+app.use(expressLayouts);
+app.set("layout", "layouts/main");
+app.set("view engine", "ejs");
 
 // Dotenv
 
 // Routes
 app.get("/", (req, res) => {
-  res.status(200).render("paginaEmConstrucao");
+  res
+    .status(200)
+    .render("paginaEmConstrucao", { title: "Página em construção" });
 });
 
 // Error 404 Page
