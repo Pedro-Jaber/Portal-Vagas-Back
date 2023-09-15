@@ -1,13 +1,7 @@
 :root {
-  --gold: #ffd93a;
-
   --cor-neutra-60: #eff4ee;
   --cor-primaria-30: #460f9e;
   --cor-call-for-action-10: #05aed5;
-}
-
-body {
-  background-color: var(--gold);
 }
 
 /*A B C D E F G H I J K L M N O P Q R S T U V W X Y Z*/
@@ -84,6 +78,10 @@ body {
   .nav-item:hover::after {
     width: 100%;
   }
+}
+
+.pagina-em-contrucao {
+  background-color: var(--gold);
 }
 
 .w-fit-content {
