@@ -23,7 +23,10 @@ app.get("/", (req, res) => {
 
 // Error 404 Page
 app.get("*", (req, res) => {
-  res.status(404).send("404");
+  res
+    .status(404)
+    .render("paginaEmConstrucao", { title: "Página em construção" });
+  // res.status(404).send("404");
 });
 
 // App Listen
