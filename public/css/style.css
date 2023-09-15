@@ -1,5 +1,9 @@
 :root {
   --gold: #ffd93a;
+
+  --cor-neutra-60: #eff4ee;
+  --cor-primaria-30: #460f9e;
+  --cor-call-for-action-10: #05aed5;
 }
 
 body {
@@ -12,7 +16,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
 }
 
 .container-block {
@@ -24,6 +28,10 @@ body {
 
 .img-em-construcao {
   max-height: 300px;
+}
+
+.logo-navbar {
+  height: 4rem;
 }
 
 .main-box {
@@ -51,6 +59,30 @@ body {
   .main-box {
     padding-left: 125px;
     padding-right: 125px;
+  }
+}
+
+/* .navbar {
+  position: fixed;
+  width: 100%;
+} */
+
+.nav-item {
+  position: relative;
+}
+
+@media (min-width: 576px) {
+  .nav-item::after {
+    content: "";
+    height: 3px;
+    width: 0%;
+    position: absolute;
+    background: var(--cor-primaria-30);
+    transition: 0.5s;
+  }
+
+  .nav-item:hover::after {
+    width: 100%;
   }
 }
 
