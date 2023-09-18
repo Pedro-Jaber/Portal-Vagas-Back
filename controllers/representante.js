@@ -27,6 +27,7 @@ module.exports.cadastroRepresentante_post = (req, res) => {
 };
 
 module.exports.painel = (req, res) => {
-  const { user_id } = req.params;
-  res.status(200).send(`Painel [user:${user_id}]`);
+  const { user_id } = req.params || "";
+  if (user_id != "") res.status(200).send(`Painel [user:${user_id}]`);
+  res.status(404).send("404"); //TODO alterar para redirect 404
 };
