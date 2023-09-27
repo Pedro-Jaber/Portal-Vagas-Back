@@ -1,8 +1,11 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 
+const { sequelize } = require("./model/dataBase");
+
 const candidatoRouter = require("./routers/candidato");
 const representanteRouter = require("./routers/representante");
+const bataBaseRouter = require("./routers/bataBase");
 
 //* App
 const app = express();
@@ -21,6 +24,7 @@ app.set("view engine", "ejs");
 //* Routes
 app.get(["/", "/home"], (req, res) => res.status(200).send("Home"));
 // app.get("/", (req, res) => res.status(200).render("home", { title: "Home" }));
+app.use("/db", bataBaseRouter);
 app.use("/candidato", candidatoRouter);
 app.use("/representante", representanteRouter);
 
@@ -31,9 +35,21 @@ app.get("*", (req, res) => res.status(404).send("404"));
 // );
 
 //* App Listen
-app.listen(PORT, () => {
-  console.log("=~=~=~=~=~=~=~=~=~=~=~=~=~=");
-  console.log("Server:\x1b[92m Online \x1b[0m");
-  console.log("Port: " + PORT);
-  console.log(`link: http://localhost:${PORT}`);
-});
+async function start() {
+  try {
+    await sequelize.authenticate();
+    console.log("=~=~=~=~=~=~=~=~=~=~=~=~=~=");
+    console.log("DataBase:\x1b[92m Online \x1b[0m");
+
+    app.listen(PORT, () => {
+      console.log("Server:\x1b[92m Online \x1b[0m");
+      console.log("Port: " + PORT);
+      console.log(`link: http://localhost:${PORT}`);
+      console.log("->");
+    });
+  } catch (error) {
+    console.log("Não foi possivel se conectar ao banco de dados");
+    console.error(error);
+  }
+}
+start();
