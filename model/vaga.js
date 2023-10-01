@@ -1,35 +1,52 @@
+const { DataTypes } = require("sequelize");
 const dataBase = require("./dataBase");
 
 /* 
-create table if not exists vaga (
-	id serial primary key not null,
-	cargaHoraria integer not null,
-	bolsa money not null,
-	descricao text
-);
+Vaga {
+	id,
+	cargaHoraria,
+	bolsa,
+	descricao,
+}
 */
 
 const Vaga = dataBase.sequelize.define(
   "vaga",
   {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+    codigo: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      unique: true,
+    },
+    empresa: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
     cargaHoraria: {
-      type: dataBase.Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     bolsa: {
-      type: dataBase.Sequelize.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
     descricao: {
-      type: dataBase.Sequelize.TEXT,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
   },
   {
-    tableName: "vaga",
+    freezeTableName: true,
   },
 );
 
-// Vaga.sync({ force: true });
+Vaga.sync();
 
-module.exports = Vaga;
+module.exports = {
+  Vaga,
+};
