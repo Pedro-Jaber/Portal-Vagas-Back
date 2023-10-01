@@ -20,6 +20,19 @@
   padding: 1rem;
 }
 
+.div-home {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--cor-neutra-60);
+}
+
+.div-home h1 {
+  font-size: 70px;
+}
+
 .img-em-construcao {
   max-height: 300px;
 }
