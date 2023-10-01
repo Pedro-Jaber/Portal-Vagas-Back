@@ -1,3 +1,4 @@
+const { DataTypes } = require("sequelize");
 const dataBase = require("./dataBase");
 
 /*
@@ -15,30 +16,57 @@ create table if not exists candidato (
 const Candidato = dataBase.sequelize.define(
   "candidato",
   {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
     nome: {
-      type: dataBase.Sequelize.STRING(100),
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     email: {
-      type: dataBase.Sequelize.STRING(100),
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     senha: {
-      type: dataBase.Sequelize.STRING(100),
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
     nascimento: {
-      type: dataBase.Sequelize.DATEONLY,
+      type: DataTypes.DATEONLY,
     },
     cpf: {
-      type: dataBase.Sequelize.STRING(14),
+      type: DataTypes.STRING(14),
     },
   },
   {
-    tableName: "candidato",
+    freezeTableName: true,
   },
 );
 
-//Candidato.sync({ force: true });
+Candidato.sync();
 
-module.exports = Candidato;
+criarCandidato = async (nome, email, senha, nascimento, cpf) => {
+  nascimento = nascimento || null;
+  cpf = cpf || null;
+
+  try {
+    const candidato = await Candidato.create({
+      nome,
+      email,
+      senha,
+      nascimento,
+      cpf,
+    });
+
+    return candidato;
+  } catch (err) {
+    return err;
+  }
+};
+
+module.exports = {
+  Candidato,
+  criarCandidato,
+};
