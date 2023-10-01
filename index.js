@@ -9,10 +9,12 @@ const bataBaseRouter = require("./routers/bataBase");
 
 //* App
 const app = express();
-const PORT = 8081;
+const PORT = 8081; //TODO Criar variavel de ambiente
 
 //* Middleware
 app.use(express.static("public"));
+// app.use(express.urlencoded);
+// app.use(express.json());
 
 //* View Engine
 app.use(expressLayouts);
