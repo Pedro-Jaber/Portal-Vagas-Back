@@ -1,4 +1,8 @@
 const { Candidato, criarCandidato } = require("../model/candidato");
+const {
+  Representante,
+  gerarSenhaTemporaria,
+} = require("../model/representante");
 const { Vaga } = require("../model/vaga");
 const {
   VagaCandidato,
@@ -9,6 +13,7 @@ module.exports.createCand = async (req, res) => {
   // criarCandidatos();
   // criarVagas();
   // criarRelacaoVagaCandidato();
+  //criarRepresentantes();
 
   // const candidato = await criarCandidato(
   //   "nomeTest",
@@ -17,15 +22,31 @@ module.exports.createCand = async (req, res) => {
   // );
   // res.send(candidato);
 
-  res.send("test");
+  res.send("va para http://localhost:8081/db/selectCand para ver o resultado");
 };
 
 module.exports.selectCand = async (req, res) => {
   const candidatos = await Candidato.findAll();
   const vagas = await Vaga.findAll();
   const vagasCandidatos = await VagaCandidato.findAll();
+  const representante = await Representante.findAll();
 
-  res.send([candidatos, vagas, vagasCandidatos]);
+  res.send([
+    "candidatos",
+    candidatos,
+    "vagas",
+    vagas,
+    "vagasCandidatos",
+    vagasCandidatos,
+    "representante",
+    representante,
+  ]);
+};
+
+module.exports.test = async (req, res) => {
+  const password = gerarSenhaTemporaria();
+  console.log(password);
+  res.send(password);
 };
 
 async function criarCandidatos() {
@@ -202,4 +223,63 @@ async function criarRelacaoVagaCandidato() {
     "15d5424e-e1c9-4ee6-97fd-9b01de4f5b0e",
     "da8b8fed-ac9d-4cb9-9545-f4af558909b8",
   );
+}
+
+async function criarRepresentantes() {
+  try {
+    await Representante.sync({ force: true }); // Isso irá criar a tabela 'representante'
+
+    // Array de dados de representantes
+    const representantesData = [
+      {
+        nome: "Paulo Oliveira",
+        email: "paulo@email.com",
+        senha: "senhaRepresentante1",
+        cpf: "111.222.333-00",
+      },
+      {
+        nome: "Julia Santos",
+        email: "julia@email.com",
+        senha: "senhaRepresentante2",
+        cpf: "222.333.444-11",
+      },
+      {
+        nome: "Lucas Silva",
+        email: "lucas@email.com",
+        senha: "senhaRepresentante3",
+        cpf: "333.444.555-22",
+      },
+      {
+        nome: "Mariana Alves",
+        email: "mariana@email.com",
+        senha: "senhaRepresentante4",
+        cpf: "444.555.666-33",
+      },
+      {
+        nome: "Rafael Costa",
+        email: "rafael@email.com",
+        senha: "senhaRepresentante5",
+        cpf: "555.666.777-44",
+      },
+      {
+        nome: "Isabel Martins",
+        email: "isabel@email.com",
+        senha: "senhaRepresentante6",
+        cpf: "666.777.888-55",
+      },
+      {
+        nome: "Gustavo Lima",
+        email: "gustavo@email.com",
+        senha: "senhaRepresentante7",
+        cpf: "777.888.999-66",
+      },
+    ];
+
+    // Crie os representantes no banco de dados
+    await Representante.bulkCreate(representantesData);
+
+    console.log("Representantes criados com sucesso.");
+  } catch (error) {
+    console.error("Erro ao criar representantes:", error);
+  }
 }
