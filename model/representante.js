@@ -1,6 +1,8 @@
 const { DataTypes } = require("sequelize");
 const dataBase = require("./dataBase");
 
+const { Entropy, charset32 } = require("entropy-string");
+
 /*
 create table if not exists representante (
   id serial primary key not null,
@@ -42,4 +44,31 @@ const Representante = dataBase.sequelize.define(
 
 Representante.sync();
 
-module.exports = Representante;
+criarRepresentante = async (nome, email, senha, cpf) => {
+  senha = senha || null;
+  cpf = cpf || null;
+
+  try {
+    const representante = Representante.create({
+      nome,
+      email,
+      senha,
+      cpf,
+    });
+
+    return representante;
+  } catch (err) {
+    return err;
+  }
+};
+
+gerarSenhaTemporaria = () => {
+  const entropy = new Entropy({ charset: charset32, bits: 64 });
+  return entropy.string();
+};
+
+module.exports = {
+  Representante,
+  criarRepresentante,
+  gerarSenhaTemporaria,
+};
