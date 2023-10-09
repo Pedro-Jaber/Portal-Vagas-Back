@@ -1,6 +1,7 @@
 const { Candidato, criarCandidato } = require("../model/candidato");
 const {
   Representante,
+  criarRepresentante,
   gerarSenhaTemporaria,
 } = require("../model/representante");
 const { Vaga } = require("../model/vaga");
@@ -47,6 +48,30 @@ module.exports.test = async (req, res) => {
   const password = gerarSenhaTemporaria();
   console.log(password);
   res.send(password);
+};
+
+module.exports.testFormGet = async (req, res) => {
+  try {
+    const representante = await Representante.findAll({
+      order: [["createdAt", "DESC"]],
+    });
+
+    res
+      .status(200)
+      .render("representante", { title: "testForm", data: representante });
+  } catch (error) {
+    res.status(500).send("500 Internal Server Error: " + error);
+  }
+};
+module.exports.testFormPost = async (req, res) => {
+  const { nome, email, cpf } = req.body;
+  criarRepresentante(nome, email, cpf)
+    .then(() => {
+      res.status(200).redirect("/db/testForm");
+    })
+    .catch((error) => {
+      res.status(500).send("500 Internal Server Error: " + error);
+    });
 };
 
 async function criarCandidatos() {
@@ -232,46 +257,46 @@ async function criarRepresentantes() {
     // Array de dados de representantes
     const representantesData = [
       {
-        nome: "Paulo Oliveira",
-        email: "paulo@email.com",
-        senha: "senhaRepresentante1",
-        cpf: "111.222.333-00",
-      },
-      {
         nome: "Julia Santos",
-        email: "julia@email.com",
-        senha: "senhaRepresentante2",
-        cpf: "222.333.444-11",
+        email: "festapanda@email.com",
+        senha: "PtDmNbr67BtTH",
+        cpf: "039.015.811-97",
       },
       {
         nome: "Lucas Silva",
-        email: "lucas@email.com",
-        senha: "senhaRepresentante3",
-        cpf: "333.444.555-22",
+        email: "unicornsrock@email.com",
+        senha: "j6DgMp4rpnhPB",
+        cpf: "980.203.181-00",
       },
       {
         nome: "Mariana Alves",
-        email: "mariana@email.com",
-        senha: "senhaRepresentante4",
-        cpf: "444.555.666-33",
+        email: "surfistasdoespaco@email.com",
+        senha: "QNJ79N8NnHpjp",
+        cpf: "805.513.601-78",
       },
       {
         nome: "Rafael Costa",
-        email: "rafael@email.com",
-        senha: "senhaRepresentante5",
-        cpf: "555.666.777-44",
+        email: "amantedechocolate@email.com",
+        senha: "2t7mRjD2dhJmd",
+        cpf: "462.736.741-40",
       },
       {
         nome: "Isabel Martins",
-        email: "isabel@email.com",
-        senha: "senhaRepresentante6",
-        cpf: "666.777.888-55",
+        email: "viajantetemporal@email.com",
+        senha: "bFdQhMGRfDFHt",
+        cpf: "177.793.711-66",
       },
       {
         nome: "Gustavo Lima",
-        email: "gustavo@email.com",
-        senha: "senhaRepresentante7",
-        cpf: "777.888.999-66",
+        email: "sorvetedepizza@email.com",
+        senha: "gF2f2Jq7Db6pt",
+        cpf: "239.433.701-00",
+      },
+      {
+        nome: "Paulo Oliveira",
+        email: "amigodoalien@email.com",
+        senha: "gDffPmH8b7DbJ",
+        cpf: "916.340.481-80",
       },
     ];
 
