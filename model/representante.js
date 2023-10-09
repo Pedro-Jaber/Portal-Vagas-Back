@@ -44,8 +44,13 @@ const Representante = dataBase.sequelize.define(
 
 Representante.sync();
 
-criarRepresentante = async (nome, email, senha, cpf) => {
-  senha = senha || null;
+gerarSenhaTemporaria = () => {
+  const entropy = new Entropy({ charset: charset32, bits: 64 });
+  return entropy.string();
+};
+
+criarRepresentante = async (nome, email, cpf, senha) => {
+  senha = senha || gerarSenhaTemporaria();
   cpf = cpf || null;
 
   try {
@@ -60,11 +65,6 @@ criarRepresentante = async (nome, email, senha, cpf) => {
   } catch (err) {
     return err;
   }
-};
-
-gerarSenhaTemporaria = () => {
-  const entropy = new Entropy({ charset: charset32, bits: 64 });
-  return entropy.string();
 };
 
 module.exports = {
