@@ -1,0 +1,72 @@
+<div class="container-block mt-5">
+  <div class="mx-auto">
+    <form action="/db/testForm" method="POST">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <label for="inputNome" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="inputNome" name="nome" />
+        </div>
+
+        <div class="col-6 mb-3">
+          <label for="inputEmail" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="inputEmail"
+            name="email"
+          />
+        </div>
+
+        <div class="col-6 mb-3">
+          <label for="inputCPF" class="form-label">CPF</label>
+          <input type="text" class="form-control" id="inputCPF" name="cpf" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<div class="overflow-auto container-block mt-5" style="max-height: 500px">
+  <ul class="list-group">
+    <% data.forEach(representante => { %>
+
+    <li class="list-group-item py-4">
+      <div class="d-flex mb-2">
+        <p class="text-capitalize fs-3 fw-bold m-0">
+          <%= representante.nome %>
+        </p>
+        <span class="d-flex font-monospace align-items-center me-0 ms-auto"
+          ><%= representante.id %>
+        </span>
+      </div>
+
+      <div class="d-flex">
+        <p class="fw-bold m-0">CPF:</p>
+        <span class="ms-1"><%= representante.cpf || "NULL" %></span>
+      </div>
+
+      <div class="d-flex">
+        <p class="fw-bold m-0">Email:</p>
+        <span class="ms-1"><%= representante.email %></span>
+      </div>
+
+      <div class="d-flex">
+        <p class="fw-bold m-0">Senha:</p>
+        <span class="ms-1"><%= representante.senha %></span>
+      </div>
+
+      <div class="d-flex mt-3">
+        <p class="fw-bold m-0">Criado em:</p>
+        <span class="ms-1"><%= representante.createdAt.toString() %></span>
+      </div>
+
+      <div class="d-flex">
+        <p class="fw-bold m-0">Ultima atualização:</p>
+        <span class="ms-1"><%= representante.updatedAt.toString() %></span>
+      </div>
+    </li>
+
+    <% }) %>
+  </ul>
+</div>
