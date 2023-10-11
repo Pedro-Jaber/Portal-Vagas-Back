@@ -4,7 +4,7 @@ const {
   criarRepresentante,
   gerarSenhaTemporaria,
 } = require("../model/representante");
-const { Vaga } = require("../model/vaga");
+const { Vaga, criarVaga } = require("../model/vaga");
 const {
   VagaCandidato,
   candidatoParticiparDeVaga,
@@ -50,28 +50,80 @@ module.exports.test = async (req, res) => {
   res.send(password);
 };
 
-module.exports.testFormGet = async (req, res) => {
+module.exports.testRepresentanteGet = async (req, res) => {
   try {
-    const representante = await Representante.findAll({
+    const representantes = await Representante.findAll({
       order: [["createdAt", "DESC"]],
     });
 
-    res
-      .status(200)
-      .render("representante", { title: "testForm", data: representante });
+    res.status(200).render("formsESelect", {
+      title: "representantes",
+      data: representantes,
+      tag: "representante",
+    });
   } catch (error) {
     res.status(500).send("500 Internal Server Error: " + error);
   }
 };
-module.exports.testFormPost = async (req, res) => {
-  const { nome, email, cpf } = req.body;
-  criarRepresentante(nome, email, cpf)
-    .then(() => {
-      res.status(200).redirect("/db/testForm");
-    })
-    .catch((error) => {
-      res.status(500).send("500 Internal Server Error: " + error);
+
+module.exports.testVagaGet = async (req, res) => {
+  try {
+    const vagas = await Vaga.findAll({
+      order: [["createdAt", "DESC"]],
     });
+
+    res.status(200).render("formsESelect", {
+      title: "vagas",
+      data: vagas,
+      tag: "vaga",
+    });
+  } catch (error) {
+    res.status(500).send("500 Internal Server Error: " + error);
+  }
+};
+
+module.exports.testFormPost = async (req, res) => {
+  const { tag } = req.body;
+  console.log(req.body);
+  try {
+    if (tag == "representante") {
+      let { nome, email, cpf } = req.body;
+      //TODO passar o tratamento de erro para dentro da função
+      if (nome == "") {
+        throw "O nome não poder ser null";
+      }
+      if (email == "") {
+        throw "O email não poder ser null";
+      }
+      if (cpf == "") {
+        throw "O CPF não poder ser null";
+      }
+      criarRepresentante(nome, email, cpf);
+    }
+
+    if (tag == "vaga") {
+      let { empresa, cargaHoraria, bolsa, descricao } = req.body;
+      //TODO passar o tratamento de erro para dentro da função
+      if (empresa == "") {
+        throw "A empresa não poder ser null";
+      }
+      if (cargaHoraria == "") {
+        throw "A carga horaria não poder ser null";
+      }
+      if (bolsa == "") {
+        throw "A bolsa não poder ser null";
+      }
+      if (descricao == "") {
+        throw "A dercrição não poder ser null";
+      }
+
+      criarVaga(empresa, cargaHoraria, bolsa, descricao);
+    }
+
+    res.status(200).redirect(`/db/${tag}`);
+  } catch (error) {
+    res.status(500).send("500 Internal Server Error: " + error);
+  }
 };
 
 async function criarCandidatos() {
