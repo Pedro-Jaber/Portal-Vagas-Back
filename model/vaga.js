@@ -7,6 +7,10 @@ Vaga {
 	cargaHoraria,
 	bolsa,
 	descricao,
+
+  Data de início de contrato,
+  Data de término de contrato,
+  Serviço contratado,
 }
 */
 
@@ -23,6 +27,7 @@ const Vaga = dataBase.sequelize.define(
       autoIncrement: true,
       unique: true,
     },
+    //TODO substituir "empresa" por "código empresa" uma FK
     empresa: {
       type: DataTypes.STRING(100),
       allowNull: false,
@@ -47,6 +52,25 @@ const Vaga = dataBase.sequelize.define(
 
 Vaga.sync();
 
+//Função para criar uma vaga no Banco de Dados
+// Recebe o nome da empresa, o tempo de trabalho por dia, o valor da bolsa por mês e a descrição do que deve ser realizado
+//TODO deve receber o código da empresa uma FK
+criarVaga = async (empresa, cargaHoraria, bolsa, descricao) => {
+  try {
+    const vaga = Vaga.create({
+      empresa,
+      cargaHoraria,
+      bolsa,
+      descricao,
+    });
+
+    return vaga;
+  } catch (error) {
+    return err;
+  }
+};
+
 module.exports = {
   Vaga,
+  criarVaga,
 };
