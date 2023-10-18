@@ -29,6 +29,7 @@ const Candidato = dataBase.sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: false,
     },
+    //TODO criptografar a senha para colocar no banco de dados
     senha: {
       type: DataTypes.STRING(100),
       allowNull: false,
@@ -66,7 +67,22 @@ criarCandidato = async (nome, email, senha, nascimento, cpf) => {
   }
 };
 
+login = async (email, password) => {
+  const user = await Candidato.findOne({ where: { email: email } });
+  if (!user) {
+    throw Error("Credenciais Incorretas");
+  }
+  const auth = password == user.senha ? true : false; //TODO descriptografar a senha do banco de dados
+
+  if (!auth) {
+    throw Error("Credenciais Incorretas");
+  }
+
+  return user;
+};
+
 module.exports = {
   Candidato,
   criarCandidato,
+  login,
 };
