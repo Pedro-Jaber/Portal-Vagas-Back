@@ -2,11 +2,14 @@
   <div class="mx-auto">
     <form action="/auth/login" method="POST">
       <legend>Formulario Representante</legend>
-      <div class="" id="errorsDiv">
-        <% var errors = errors || null %> <% if (errors) { %>
-        <script></script>
-        <%= errors.credenciais %> <% } %>
+      <% var errors = errors || null %> <% if (errors) { %>
+      <div class="invalid-feedback" id="errorsDiv">
+        <%= errors.credenciais %>
       </div>
+      <script>
+        document.getElementById("errorsDiv").style.display = "inherit";
+      </script>
+      <% } %>
       <div class="row">
         <div class="col-12 mb-3">
           <label for="inputEmail" class="form-label">Email</label>
@@ -33,3 +36,10 @@
     </form>
   </div>
 </div>
+
+<% var errors = errors || null %> <% if (errors) { %>
+<script>
+  document.getElementById("inputEmail").style.borderColor = "red";
+  document.getElementById("inputSenha").style.borderColor = "red";
+</script>
+<% } %>
