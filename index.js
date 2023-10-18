@@ -1,11 +1,16 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
+const dotenv = require("dotenv");
 
 const { sequelize } = require("./model/dataBase");
 
 const candidatoRouter = require("./routers/candidato");
 const representanteRouter = require("./routers/representante");
-const bataBaseRouter = require("./routers/bataBase");
+const dataBaseRouter = require("./routers/bataBase");
+const authRouter = require("./routers/auth");
+
+//*Dotenv
+dotenv.config();
 
 //* App
 const app = express();
@@ -26,7 +31,8 @@ app.set("view engine", "ejs");
 //* Routes
 app.get(["/", "/home"], (req, res) => res.status(200).send("Home"));
 // app.get("/", (req, res) => res.status(200).render("home", { title: "Home" }));
-app.use("/db", bataBaseRouter);
+app.use("/db", dataBaseRouter);
+app.use("/auth", authRouter); //TODO fazer rotas diferentes para candidato e representante
 app.use("/candidato", candidatoRouter);
 app.use("/representante", representanteRouter);
 
@@ -50,7 +56,10 @@ async function start() {
       console.log("->");
     });
   } catch (error) {
-    console.log("Não foi possivel se conectar ao banco de dados");
+    console.log("\x1b[31m┌────────────────────────────────────────────────┐");
+    console.log("│ Não foi possivel se conectar ao banco de dados │");
+    console.log("└────────────────────────────────────────────────┘\x1b[0m");
+
     console.error(error);
   }
 }
