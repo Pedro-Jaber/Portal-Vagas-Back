@@ -67,7 +67,8 @@ criarCandidato = async (nome, email, senha, nascimento, cpf) => {
   }
 };
 
-login = async (email, password) => {
+verificaCandidato = async (email, password) => {
+  //TODO renomear para verifica candidado
   const user = await Candidato.findOne({ where: { email: email } });
   if (!user) {
     throw Error("Credenciais Incorretas");
@@ -84,5 +85,5 @@ login = async (email, password) => {
 module.exports = {
   Candidato,
   criarCandidato,
-  login,
+  verificaCandidato,
 };

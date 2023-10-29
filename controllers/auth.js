@@ -44,10 +44,10 @@ module.exports.loginPost = async (req, res) => {
   const { email, senha } = req.body; //TODO adicionar a opção de logar com cpf tbm
 
   try {
-    const user = await candidato.login(email, senha);
+    const user = await candidato.verificaCandidato(email, senha);
     const token = createToken(user.id);
-    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(200).json({ user: user.id }); //TODO redirect para a home
+    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 }); //TODO Mudar para Https
+    res.status(200).json({ user: user.id }); //TODO redirect para a home ou painel
   } catch (error) {
     const errors = handleErrors(error);
     console.log(errors);
