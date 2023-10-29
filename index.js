@@ -60,7 +60,7 @@ async function start() {
     console.log("│ Não foi possivel se conectar ao banco de dados │");
     console.log("└────────────────────────────────────────────────┘\x1b[0m");
 
-    console.error(error);
+    // console.error(error);
   }
 }
 start();
