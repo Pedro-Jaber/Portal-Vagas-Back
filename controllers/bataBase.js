@@ -82,6 +82,22 @@ module.exports.testVagaGet = async (req, res) => {
   }
 };
 
+module.exports.testCandidatoGet = async (req, res) => {
+  try {
+    const candidatos = await Candidato.findAll({
+      order: [["createdAt", "DESC"]],
+    });
+
+    res.status(200).render("formsESelect", {
+      title: "candidato",
+      data: candidatos,
+      tag: "candidato",
+    });
+  } catch (error) {
+    res.status(500).send("500 Internal Server Error: " + error);
+  }
+};
+
 module.exports.testFormPost = async (req, res) => {
   const { tag } = req.body;
   console.log(req.body);
@@ -118,6 +134,21 @@ module.exports.testFormPost = async (req, res) => {
       }
 
       criarVaga(empresa, cargaHoraria, bolsa, descricao);
+    }
+
+    if (tag == "candidato") {
+      const { nome, email, senha, nascimento, cpf } = req.body;
+      if (!nome) {
+        throw "O nome não pode ser null";
+      }
+      if (!email) {
+        throw "O email não pode ser null";
+      }
+      // if (!senha) {
+      //   throw "A senha não pode ser null";
+      // }
+
+      criarCandidato(nome, email, senha, nascimento, cpf);
     }
 
     res.status(200).redirect(`/db/${tag}`);
