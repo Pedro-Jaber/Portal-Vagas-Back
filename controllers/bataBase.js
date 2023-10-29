@@ -103,7 +103,9 @@ module.exports.testFormPost = async (req, res) => {
   console.log(req.body);
   try {
     if (tag == "representante") {
-      let { nome, email, cpf } = req.body;
+      let { nome, email, senha, cpf } = req.body;
+      senha = senha || gerarSenhaTemporaria(); //TODO tirar o gerador de senha
+
       //TODO passar o tratamento de erro para dentro da função
       if (nome == "") {
         throw "O nome não poder ser null";
@@ -114,7 +116,7 @@ module.exports.testFormPost = async (req, res) => {
       if (cpf == "") {
         throw "O CPF não poder ser null";
       }
-      criarRepresentante(nome, email, cpf);
+      criarRepresentante(nome, email, senha, cpf);
     }
 
     if (tag == "vaga") {
@@ -138,6 +140,9 @@ module.exports.testFormPost = async (req, res) => {
 
     if (tag == "candidato") {
       const { nome, email, senha, nascimento, cpf } = req.body;
+      senha = senha || gerarSenhaTemporaria(); //TODO tirar o gerador de senha
+
+      //TODO passar o tratamento de erro para dentro da função
       if (!nome) {
         throw "O nome não pode ser null";
       }

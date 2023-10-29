@@ -49,8 +49,7 @@ gerarSenhaTemporaria = () => {
   return entropy.string();
 };
 
-criarRepresentante = async (nome, email, cpf, senha) => {
-  senha = senha || gerarSenhaTemporaria();
+criarRepresentante = async (nome, email, senha, cpf) => {
   cpf = cpf || null;
 
   try {
