@@ -45,4 +45,25 @@ const checkUser = (req, res, next) => {
   }
 };
 
-module.exports = { requireAuth, checkUser };
+// Impede que usuário acesse o painel de outro usuário
+const canViewPanel = (req, res, next) => {
+  const token = req.cookies.jwt;
+
+  if (token) {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+      if (err) {
+        res.redirect("auth/login");
+      }
+      // console.log(decodedToken.id);
+      // console.log(req.params.user_id);
+      // Verifica se os IDs de usuário são iguais
+      if (decodedToken.id == req.params.user_id) {
+        next();
+      } else {
+        res.redirect("/401");
+      }
+    });
+  }
+};
+
+module.exports = { requireAuth, checkUser, canViewPanel };
