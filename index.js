@@ -1,9 +1,12 @@
+// Dependencies
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
+const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 
 const { sequelize } = require("./model/dataBase");
 
+// Routers
 const candidatoRouter = require("./routers/candidato");
 const representanteRouter = require("./routers/representante");
 const dataBaseRouter = require("./routers/bataBase");
@@ -20,6 +23,7 @@ const PORT = 8081; //TODO Criar variavel de ambiente
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 //* View Engine
 app.use(expressLayouts);
