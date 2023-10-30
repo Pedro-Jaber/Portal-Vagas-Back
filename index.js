@@ -12,6 +12,9 @@ const representanteRouter = require("./routers/representante");
 const dataBaseRouter = require("./routers/bataBase");
 const authRouter = require("./routers/auth");
 
+// Middlewares
+const { checkUser } = require("./middleware/auth");
+
 //*Dotenv
 dotenv.config();
 
@@ -33,6 +36,7 @@ app.set("view engine", "ejs");
 //* Dotenv
 
 //* Routes
+app.get("*", checkUser);
 app.get(["/", "/home"], (req, res) => res.status(200).send("Home"));
 // app.get("/", (req, res) => res.status(200).render("home", { title: "Home" }));
 app.use("/db", dataBaseRouter);
@@ -40,8 +44,11 @@ app.use("/auth", authRouter); //TODO fazer rotas diferentes para candidato e rep
 app.use("/candidato", candidatoRouter);
 app.use("/representante", representanteRouter);
 
+//TODO Errors router
 //* Error 404 Page
-app.get("*", (req, res) => res.status(404).send("404"));
+app.use("/401", (req, res) => res.status(401).send("401 Unauthorized"));
+app.get("/404", (req, res) => res.status(404).send("404 Not Found"));
+app.get("*", (req, res) => res.status(404).redirect("/404"));
 // app.get("*", (req, res) =>
 //   res.status(404).render("404_error", { title: "Página não encontrada 404" }),
 // );
