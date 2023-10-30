@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const { Candidato } = require("../model/candidato");
 
 // check if the user is logged in
 const requireAuth = (req, res, next) => {
@@ -10,20 +10,19 @@ const requireAuth = (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
       if (err) {
         console.log(err.message);
-        res.redirect("/login");
+        res.redirect("/auth/login");
       } else {
         //console.log(decodedToken)
         next();
       }
     });
   } else {
-    res.redirect("/login");
+    res.redirect("/auth/login");
   }
 };
 
 // check current user
 const checkUser = (req, res, next) => {
-  console.log(req);
   const token = req.cookies.jwt;
 
   if (token) {
@@ -34,7 +33,8 @@ const checkUser = (req, res, next) => {
         next();
       } else {
         //console.log(decodedToken)
-        let user = await User.findById(decodedToken.id);
+        let user = await Candidato.findOne({ where: { id: decodedToken.id } });
+        // console.log(user);
         res.locals.user = user;
         next();
       }
