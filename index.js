@@ -20,7 +20,7 @@ dotenv.config();
 
 //* App
 const app = express();
-const PORT = 8081; //TODO Criar variavel de ambiente
+const PORT = process.env.PORT || 8081;
 
 //* Middleware
 app.use(express.static("public"));
