@@ -139,7 +139,7 @@ module.exports.testFormPost = async (req, res) => {
     }
 
     if (tag == "candidato") {
-      const { nome, email, senha, nascimento, cpf } = req.body;
+      let { nome, email, senha, nascimento, cpf } = req.body;
       senha = senha || gerarSenhaTemporaria(); //TODO tirar o gerador de senha
 
       //TODO passar o tratamento de erro para dentro da função
