@@ -67,7 +67,6 @@ criarRepresentante = async (nome, email, senha, cpf) => {
 };
 
 verificaRepresentante = async (email, password) => {
-  //TODO renomear para verifica candidado
   const user = await Representante.findOne({ where: { email: email } });
   if (!user) {
     throw Error("Credenciais Incorretas");
