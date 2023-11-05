@@ -66,8 +66,24 @@ criarRepresentante = async (nome, email, senha, cpf) => {
   }
 };
 
+verificaRepresentante = async (email, password) => {
+  //TODO renomear para verifica candidado
+  const user = await Representante.findOne({ where: { email: email } });
+  if (!user) {
+    throw Error("Credenciais Incorretas");
+  }
+  const auth = password == user.senha ? true : false; //TODO descriptografar a senha do banco de dados
+
+  if (!auth) {
+    throw Error("Credenciais Incorretas");
+  }
+
+  return user;
+};
+
 module.exports = {
   Representante,
   criarRepresentante,
   gerarSenhaTemporaria,
+  verificaRepresentante,
 };
