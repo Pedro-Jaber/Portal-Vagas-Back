@@ -37,7 +37,9 @@ app.set("view engine", "ejs");
 
 //* Routes
 app.get("*", checkUser);
-app.get(["/", "/home"], (req, res) => res.status(200).send("Home"));
+app.get(["/", "/home"], (req, res) =>
+  res.status(200).render("home", { title: "Home" }),
+);
 // app.get("/", (req, res) => res.status(200).render("home", { title: "Home" }));
 app.use("/db", dataBaseRouter);
 app.use("/auth", authRouter); //TODO fazer rotas diferentes para candidato e representante
