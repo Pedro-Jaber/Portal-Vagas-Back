@@ -46,6 +46,7 @@ const checkUser = (req, res, next) => {
 };
 
 // Impede que usuário acesse o painel de outro usuário
+//TODO Fazer um teste para verifica se está funcionando
 const canViewPanel = (req, res, next) => {
   const token = req.cookies.jwt;
 
