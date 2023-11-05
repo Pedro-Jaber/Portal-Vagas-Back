@@ -8,7 +8,11 @@ module.exports.homeCandidato = (req, res) => {
 };
 
 module.exports.login_get = (req, res) => {
-  res.status(200).send("Login Candidato");
+  res.status(200).render("login", {
+    title: "Login Candidato",
+    tag: "candidato",
+    acessar: "#",
+  });
 };
 
 module.exports.login_post = (req, res) => {

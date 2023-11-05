@@ -6,7 +6,11 @@ module.exports.homeRepresentante = (req, res) => {
 };
 
 module.exports.login_get = (req, res) => {
-  res.status(200).send("Login Representante");
+  res.status(200).render("login", {
+    title: "Login Representante",
+    tag: "representante",
+    acessar: "#",
+  });
 };
 
 module.exports.login_post = (req, res) => {

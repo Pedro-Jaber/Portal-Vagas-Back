@@ -1,7 +1,12 @@
 <div class="container-block mt-5 mx-auto" style="max-width: 400px">
   <div class="mx-auto">
     <form action="/auth/login" method="POST">
-      <legend>Formulario Representante</legend>
+      <% if (tag === "candidato") { %>
+      <legend>Login Candidato</legend>
+      <% } else if (tag === "representante") { %>
+      <legend>Login Representante</legend>
+      <% } %>
+      <span></span>
       <% var errors = errors || null %> <% if (errors) { %>
       <div class="invalid-feedback" id="errorsDiv">
         <%= errors.credenciais %>
@@ -32,6 +37,7 @@
         </div>
       </div>
 
+      <input class="visually-hidden" type="text" name="tag" id="tag" value=<%= tag %>>
       <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
   </div>

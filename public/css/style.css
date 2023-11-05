@@ -1,11 +1,16 @@
 :root {
   --cor-neutra-60: #eff4ee;
+  --cor-dark-neutra-60: #0d0a0b;
   --cor-primaria-30: #460f9e;
   --cor-primaria-30-dark: #310b6e;
   --cor-call-for-action-10: #05aed5;
 }
 
 header {
+  background-color: var(--cor-neutra-60) !important;
+}
+
+body {
   background-color: var(--cor-neutra-60) !important;
 }
 
@@ -64,16 +69,29 @@ header {
   color: var(--cor-neutra-60);
 }
 
+.div-home h1 {
+  font-size: 70px;
+}
+
+.div-loginG {
+  display: grid;
+  place-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+
+  color: var(--cor-dark-neutra-60);
+}
+
+.div-loginG h1 {
+  font-size: 70px;
+}
+
 .glass-look {
   box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.25);
   border-top: 1px solid rgba(255, 255, 255, 0.25);
   border-right: 1px solid rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-}
-
-.div-home h1 {
-  font-size: 70px;
 }
 
 .img-em-construcao {
