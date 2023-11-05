@@ -1,10 +1,16 @@
 const Sequelize = require("sequelize");
+require("dotenv").config();
 
 // Database conection
-const sequelize = new Sequelize("jobmatchTest", "postgres", "2662", {
-  host: "localhost",
-  dialect: "postgres",
-}); //TODO Criar variaveis de ambiente
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: "postgres",
+  },
+); //TODO Criar variaveis de ambiente
 
 module.exports = {
   Sequelize,
