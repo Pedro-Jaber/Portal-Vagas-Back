@@ -1,3 +1,4 @@
+<% var acessar = acessar || undefined %>
 <header>
   <nav class="navbar navbar-expand-sm px-2">
     <div class="container-fluid">
@@ -15,6 +16,7 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+      <% if (acessar != undefined) { %>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item nav-item-underline navbar-link">
@@ -37,6 +39,7 @@
           </li>
         </ul>
       </div>
+      <% } %>
     </div>
   </nav>
 </header>
