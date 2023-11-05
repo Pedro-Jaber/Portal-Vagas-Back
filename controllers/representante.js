@@ -1,5 +1,7 @@
 module.exports.homeRepresentante = (req, res) => {
-  res.status(200).send("Home Representante");
+  res
+    .status(200)
+    .render("representante/homeRepresentante", { title: "Home Representante" });
 };
 
 module.exports.login_get = (req, res) => {
