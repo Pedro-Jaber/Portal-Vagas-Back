@@ -21,14 +21,19 @@
             <a class="nav-link" aria-current="home" href="/">Inicio</a>
           </li>
           <li class="nav-item nav-item-underline">
-            <a class="nav-link" href="/candidato/home">Portal do estudante</a>
+            <a class="nav-link" href="/candidato/home">Portal do Candidato</a>
           </li>
           <li class="nav-item nav-item-underline">
-            <a class="nav-link" href="/representante/home">Portal da empresa</a>
+            <a class="nav-link" href="/representante/home">Portal da Empresa</a>
           </li>
           <li class="nav-item">
-            <!--TODO Levar para a página de login generica -->
-            <a href="#" role="button" class="btn btn-primary px-4">Acessar</a>
+            <a
+              id="acessarButton"
+              href=<%= acessar %>
+              role="button"
+              class="btn btn-primary px-4"
+              >Acessar</a
+            >
           </li>
         </ul>
       </div>

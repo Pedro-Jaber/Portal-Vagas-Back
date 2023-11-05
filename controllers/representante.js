@@ -1,7 +1,8 @@
 module.exports.homeRepresentante = (req, res) => {
-  res
-    .status(200)
-    .render("representante/homeRepresentante", { title: "Home Representante" });
+  res.status(200).render("representante/homeRepresentante", {
+    title: "Home Representante",
+    acessar: "/representante/login",
+  });
 };
 
 module.exports.login_get = (req, res) => {

@@ -38,7 +38,7 @@ app.set("view engine", "ejs");
 //* Routes
 app.get("*", checkUser);
 app.get(["/", "/home"], (req, res) =>
-  res.status(200).render("home", { title: "Home" }),
+  res.status(200).render("home", { title: "Home", acessar: "#" }),
 );
 // app.get("/", (req, res) => res.status(200).render("home", { title: "Home" }));
 app.use("/db", dataBaseRouter);

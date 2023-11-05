@@ -1,9 +1,10 @@
 const { Candidato } = require("../model/candidato");
 
 module.exports.homeCandidato = (req, res) => {
-  res
-    .status(200)
-    .render("candidato/homeCandidato", { title: "Home Candidato" });
+  res.status(200).render("candidato/homeCandidato", {
+    title: "Home Candidato",
+    acessar: "/candidato/login",
+  });
 };
 
 module.exports.login_get = (req, res) => {
