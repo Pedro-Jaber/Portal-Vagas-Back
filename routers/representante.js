@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const controllerRepr = require("../controllers/representante");
+const { canViewPanel } = require("../middleware/auth");
 
 const router = Router();
 
@@ -16,6 +17,8 @@ router
   .route("/cadastro-representante")
   .get(controllerRepr.cadastroRepresentante_get)
   .post(controllerRepr.cadastroRepresentante_post);
-router.route("/painel/:user_id").get(controllerRepr.painel);
+router
+  .route(["/painel/:user_id", "/painel/"])
+  .get(canViewPanel, controllerRepr.painel);
 
 module.exports = router;

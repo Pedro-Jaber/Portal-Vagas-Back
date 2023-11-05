@@ -1,0 +1,38 @@
+<script>
+  //TODO Melhorar página do representante e estilizar
+  //TODO Permitir a edição dos dados do representante no painel do representante
+</script>
+
+<li class="list-group-item py-4">
+  <div class="d-flex mb-2">
+    <p class="text-capitalize fs-3 fw-bold m-0"><%= representante.nome %></p>
+    <span class="d-flex font-monospace align-items-center me-0 ms-auto"
+      ><%= representante.id %>
+    </span>
+  </div>
+
+  <div class="d-flex">
+    <p class="fw-bold m-0">CPF:</p>
+    <span class="ms-1"><%= representante.cpf %></span>
+  </div>
+
+  <div class="d-flex">
+    <p class="fw-bold m-0">Email:</p>
+    <span class="ms-1"><%= representante.email %></span>
+  </div>
+
+  <div class="d-flex">
+    <p class="fw-bold m-0">Senha:</p>
+    <span class="ms-1"><%= representante.senha %></span>
+  </div>
+
+  <div class="d-flex mt-3">
+    <p class="fw-bold m-0">Criado em:</p>
+    <span class="ms-1"><%= representante.createdAt.toString() %></span>
+  </div>
+
+  <div class="d-flex">
+    <p class="fw-bold m-0">Ultima atualização:</p>
+    <span class="ms-1"><%= representante.updatedAt.toString() %></span>
+  </div>
+</li>

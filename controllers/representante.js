@@ -1,3 +1,5 @@
+const { Representante } = require("../model/representante");
+
 module.exports.homeRepresentante = (req, res) => {
   res.status(200).render("representante/homeRepresentante", {
     title: "Home Representante",
@@ -33,8 +35,19 @@ module.exports.cadastroRepresentante_post = (req, res) => {
   console.log("tentativa de cadastro");
 };
 
-module.exports.painel = (req, res) => {
-  const { user_id } = req.params || "";
-  if (user_id != "") res.status(200).send(`Painel [user:${user_id}]`);
-  res.status(404).send("404"); //TODO alterar para redirect 404
+module.exports.painel = async (req, res) => {
+  const { user_id } = req.params;
+
+  try {
+    const representante = await Representante.findOne({
+      where: { id: user_id },
+    });
+
+    res.status(200).render("representante/painelRepresentante", {
+      title: representante.nome,
+      representante,
+    });
+  } catch (error) {
+    res.redirect("/404");
+  }
 };
