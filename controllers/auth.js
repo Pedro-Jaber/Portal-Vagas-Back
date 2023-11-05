@@ -59,7 +59,13 @@ module.exports.loginPost = async (req, res) => {
     }
     const token = createToken(user.id, role);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 }); //TODO Mudar para Https
-    res.status(200).json({ user: user.id, token: token }); //TODO redirect para a home ou painel
+
+    if (tag === "candidato") {
+    } else if (tag === "representante") {
+    }
+
+    res.status(200).redirect(`/${role}/painel/${user.id}`);
+    // res.status(200).json({ user: user.id, token: token });
   } catch (error) {
     const errors = handleErrors(error);
     console.log(errors);
