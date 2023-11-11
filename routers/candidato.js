@@ -1,12 +1,12 @@
 const { Router } = require("express");
 const controllerCand = require("../controllers/candidato");
-const { canViewPanel } = require("../middleware/auth");
+const { canViewPanel, checkUser } = require("../middleware/auth");
 
 const router = Router();
 
 router.route("/home").get(controllerCand.homeCandidato);
 router
-  .route("/login")
+  .route("/login", checkUser)
   .get(controllerCand.login_get)
   .post(controllerCand.login_post);
 router

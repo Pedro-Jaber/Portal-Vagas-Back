@@ -8,11 +8,15 @@ module.exports.homeRepresentante = (req, res) => {
 };
 
 module.exports.login_get = (req, res) => {
-  res.status(200).render("login", {
-    title: "Login Representante",
-    tag: "representante",
-    acessar: "#",
-  });
+  if (!res.locals.user) {
+    res.status(200).render("login", {
+      title: "Login Representante",
+      tag: "representante",
+      acessar: "#",
+    });
+  } else {
+    res.redirect(`/representante/painel/${res.locals.user.id}`);
+  }
 };
 
 module.exports.login_post = (req, res) => {
