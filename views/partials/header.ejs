@@ -17,6 +17,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <% if (acessar != undefined) { %>
+      <!-- TODO Desaparecer com o icone de menu quando no mobile e sem os links -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item nav-item-underline navbar-link">
@@ -31,7 +32,7 @@
           <li class="nav-item">
             <a
               id="acessarButton"
-              href=<%= acessar %>
+              href="<%= acessar %>"
               role="button"
               class="btn btn-primary px-4"
               >Acessar</a
