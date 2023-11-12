@@ -51,3 +51,32 @@
     <span class="ms-1"><%= candidato.updatedAt.toString() %></span>
   </div>
 </li>
+
+<div class="row mb-5">
+  <!-- Vagas Cadastradas -->
+  <div class="col-6">
+    <div class="container-block">
+      <!-- TODO possibilitar visualização das informações da vaga -->
+      <h1>Vagas Cadastradas</h1>
+      <% vagasCadastradas.forEach( vaga => { %>
+      <p><%= vaga.codigo %></p>
+      <% }) %>
+    </div>
+  </div>
+  <!-- Vagas Disponiveis -->
+  <div class="col-6">
+    <div class="container-block">
+      <!-- TODO possibilitar se inscrever na vaga -->
+      <h1>Vagas Disponiveis</h1>
+      <% vagasDisponiveis.forEach( vaga => { %>
+      <p><%= vaga.codigo %></p>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    background-color: aquamarine !important;
+  }
+</style>
