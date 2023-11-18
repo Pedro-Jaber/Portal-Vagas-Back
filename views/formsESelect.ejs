@@ -83,9 +83,19 @@
       <!-- nome, email, senha, data de nascimento, CPF -->
 
       <div class="row">
-        <div class="col-12 mb-3">
+        <div class="col-6 mb-3">
           <label for="inputNome" class="form-label">Nome</label>
           <input type="text" class="form-control" id="inputNome" name="nome" />
+        </div>
+
+        <div class="col-6 mb-3">
+          <label for="telefoneNome" class="form-label">Telefone</label>
+          <input
+            type="text"
+            class="form-control"
+            id="telefoneNome"
+            name="telefone"
+          />
         </div>
 
         <div class="col-6 mb-3">
@@ -124,6 +134,46 @@
           <label for="inputCPF" class="form-label">CPF</label>
           <input type="text" class="form-control" id="inputCPF" name="cpf" />
         </div>
+
+        <div class="col-12 mb-3">
+          <label class="form-label">Habilidades</label>
+          <div>
+            <div class="row">
+              <div class="col-7">Habilidade</div>
+              <div class="col-5">Nível</div>
+            </div>
+
+            <div id="habilidadesInput">
+              <div class="row mb-3" id="inputHabilidade1">
+                <div class="col-7" id="habilidade">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputHabilidade1"
+                    name="habilidade1"
+                  />
+                </div>
+                <div class="col-5" id="nivel">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputNivelHabilidade1"
+                    name="nivelHabilidade1"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button
+              id="addHabilidadeButton"
+              type="button"
+              class="btn btn-success px-3"
+              onclick="addHabilidade()"
+            >
+              Add
+            </button>
+          </div>
+        </div>
       </div>
 
       <% } %>
@@ -131,12 +181,12 @@
       <div style="display: none">
         <input type="text" id="tag" name="tag" value="<%= tag %>" />
       </div>
-      <button type="submit" class="btn btn-primary">Enviar</button>
+      <button type="submit" class="btn btn-primary px-3">Enviar</button>
     </form>
   </div>
 </div>
 
-<div class="overflow-auto container-block mt-5" style="max-height: 500px">
+<div class="overflow-auto container-block my-5" style="max-height: 500px">
   <ul class="list-group">
     <% if (tag == "representante") { %> <% data.forEach(representante => { %>
 
@@ -242,6 +292,11 @@
       </div>
 
       <div class="d-flex">
+        <p class="fw-bold m-0">Telefone:</p>
+        <span class="ms-1"><%= candidato.telefone %></span>
+      </div>
+
+      <div class="d-flex">
         <p class="fw-bold m-0">Senha:</p>
         <span class="ms-1"><%= candidato.senha %></span>
       </div>
@@ -254,6 +309,30 @@
       <div class="d-flex">
         <p class="fw-bold m-0">Nascimento:</p>
         <span class="ms-1"><%= nascimentoString %></span>
+      </div>
+
+      <div class="">
+        <p class="fw-bold m-0">Habilidades:</p>
+
+        <table class="table table-hover table-bordered">
+          <thead>
+            <th scope="col">Habilidade</th>
+            <th scope="col">Nível</th>
+          </thead>
+          <tbody>
+            <% if (candidato.habilidades == null) { %>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+            <% } else { %> <% candidato.habilidades.forEach(habilidade => { %>
+            <tr>
+              <td><%= habilidade[0] %></td>
+              <td><%= habilidade[1] %></td>
+            </tr>
+            <% }) %> <%} %>
+          </tbody>
+        </table>
       </div>
 
       <div class="d-flex mt-3">

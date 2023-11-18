@@ -1,18 +1,7 @@
 const { DataTypes } = require("sequelize");
 const dataBase = require("./dataBase");
 
-/*
-create table if not exists candidato (
-  id serial primary key not null,
-  nome varchar(100) not null,
-  email varchar(100) not null,
-  senha varchar(100) not null,
-  
-  nascimento date,
-  cpf varchar(14)
-);
-*/
-
+// Tabela do Candidato
 const Candidato = dataBase.sequelize.define(
   "candidato",
   {
@@ -40,6 +29,21 @@ const Candidato = dataBase.sequelize.define(
     cpf: {
       type: DataTypes.STRING(14),
     },
+    telefone: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
+    habilidades: {
+      type: DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.STRING(50))),
+      // Ex:
+      // tecnologia |  nivel
+      // -----------|---------
+      // HTML/CSS   | avançado
+      // Java       | intermediário
+      // JavaScript | intermediário
+      // NodeJs     | intermediário
+      // ...
+    },
   },
   {
     freezeTableName: true,
@@ -48,17 +52,34 @@ const Candidato = dataBase.sequelize.define(
 
 Candidato.sync();
 
-criarCandidato = async (nome, email, senha, nascimento, cpf) => {
+// Cria um candidato com os argumentos passados
+criarCandidato = async (
+  nome,
+  email,
+  senha,
+  telefone,
+  habilidades,
+  nascimento,
+  cpf,
+) => {
   nascimento = nascimento || null;
   cpf = cpf || null;
 
   try {
+    // Verifica se a lista de habilidades está vazia
+    if (habilidades[0] === undefined) {
+      habilidades = null;
+    }
+
+    // Cria o candidato
     const candidato = await Candidato.create({
       nome,
       email,
       senha,
       nascimento,
       cpf,
+      telefone,
+      habilidades,
     });
 
     return candidato;
@@ -67,6 +88,7 @@ criarCandidato = async (nome, email, senha, nascimento, cpf) => {
   }
 };
 
+// Verifica as credências do candidato
 verificaCandidato = async (email, password) => {
   const user = await Candidato.findOne({ where: { email: email } });
   if (!user) {

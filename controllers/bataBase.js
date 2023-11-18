@@ -98,6 +98,28 @@ module.exports.testCandidatoGet = async (req, res) => {
   }
 };
 
+function geraListaDeHabilidades(reqBody) {
+  let listaDeHabilidades = [];
+  let i = 1;
+
+  while (reqBody[`habilidade${i}`] != undefined) {
+    const habilidadeKey = `habilidade${i}`;
+    const nivelKey = `nivelHabilidade${i}`;
+
+    if (habilidadeKey in reqBody && nivelKey in reqBody) {
+      if (reqBody[habilidadeKey] !== "" && reqBody[nivelKey] !== "") {
+        const habilidade = reqBody[habilidadeKey];
+        const nivel = reqBody[nivelKey];
+        listaDeHabilidades.push([habilidade, nivel]);
+      }
+    }
+    i++;
+  }
+
+  console.log(listaDeHabilidades);
+  return listaDeHabilidades;
+}
+
 module.exports.testFormPost = async (req, res) => {
   const { tag } = req.body;
   console.log(req.body);
@@ -139,7 +161,7 @@ module.exports.testFormPost = async (req, res) => {
     }
 
     if (tag == "candidato") {
-      let { nome, email, senha, nascimento, cpf } = req.body;
+      let { nome, email, senha, nascimento, cpf, telefone } = req.body;
       senha = senha || gerarSenhaTemporaria(); //TODO tirar o gerador de senha
 
       //TODO passar o tratamento de erro para dentro da função
@@ -149,11 +171,24 @@ module.exports.testFormPost = async (req, res) => {
       if (!email) {
         throw "O email não pode ser null";
       }
+      if (!telefone) {
+        throw "O telefone não pode ser null";
+      }
       // if (!senha) {
       //   throw "A senha não pode ser null";
       // }
 
-      criarCandidato(nome, email, senha, nascimento, cpf);
+      const habilidades = geraListaDeHabilidades(req.body);
+
+      criarCandidato(
+        nome,
+        email,
+        senha,
+        telefone,
+        habilidades,
+        nascimento,
+        cpf,
+      );
     }
 
     res.status(200).redirect(`/db/${tag}`);
