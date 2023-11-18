@@ -153,11 +153,6 @@
         <div class="col-12 mb-3">
           <label class="form-label">Habilidades</label>
           <div>
-            <div class="row">
-              <div class="col-7">Habilidade</div>
-              <div class="col-5">Nível</div>
-            </div>
-
             <div id="habilidadesInput">
               <div class="row mb-3" id="inputHabilidade1">
                 <div class="col-7" id="habilidade">
@@ -166,7 +161,19 @@
                     class="form-control"
                     id="inputHabilidade1"
                     name="habilidade1"
+                    placeholder="Habilidade"
                   />
+
+                  <select
+                    id="inputHabilidade1"
+                    name="habilidade1"
+                    class="form-select visually-hidden"
+                  >
+                    <option selected value="">Habilidade</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
                 </div>
                 <div class="col-5" id="nivel">
                   <input
@@ -174,6 +181,7 @@
                     class="form-control"
                     id="inputNivelHabilidade1"
                     name="nivelHabilidade1"
+                    placeholder="Nível"
                   />
                 </div>
               </div>
