@@ -28,6 +28,7 @@ const Candidato = dataBase.sequelize.define(
     },
     cpf: {
       type: DataTypes.STRING(14),
+      allowNull: false,
     },
     telefone: {
       type: DataTypes.STRING(20),
