@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const { sequelize } = require("./model/dataBase");
 
 // Routers
+const candVagaRouter = require("./routers/vagaCandidato");
 const candidatoRouter = require("./routers/candidato");
 const representanteRouter = require("./routers/representante");
 const dataBaseRouter = require("./routers/bataBase");
@@ -41,6 +42,7 @@ app.get(["/", "/home"], (req, res) =>
     .render("home", { title: "Home", acessar: "auth/LoginGeneric" }),
 );
 // app.get("/", (req, res) => res.status(200).render("home", { title: "Home" }));
+app.use("/relations", candVagaRouter);
 app.use("/db", dataBaseRouter);
 app.use("/auth", authRouter); //TODO fazer rotas diferentes para candidato e representante
 app.use("/candidato", candidatoRouter);

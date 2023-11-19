@@ -25,3 +25,20 @@ function addHabilidade() {
 
   divHabilidadesInput.appendChild(novaHabilidade);
 }
+
+function candidatar(candidatoID, vagaID) {
+  const info = {
+    candidatoID,
+    vagaID,
+  };
+
+  fetch("/relations/candidatar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(info),
+  }).then((data) => {
+    window.location.reload();
+  });
+}
