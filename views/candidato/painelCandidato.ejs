@@ -53,7 +53,7 @@
 </div>
 
 <div class="row mb-5">
-  <!-- Vagas Cadastradas -->
+  <!--* Vagas Cadastradas ========== -->
   <div class="col-12 col-md-6">
     <div class="container-block-table-vagas scroll-bar-hide shadow-lg">
       <!-- TODO possibilitar visualização das informações da vaga -->
@@ -66,11 +66,20 @@
           <span class="mx-2"><%= vaga.cargaHoraria %> h/dia</span>
           <span class="ms-1 me-0">R$<%= vaga.bolsa %></span>
         </div>
+
+        <button
+          class="btn btn-danger px-4 ms-auto me-0"
+          id="botaoCandidatar"
+          onclick="descandidatar('<%= candidato.id %>', '<%= vaga.id %>')"
+        >
+          Sair
+        </button>
       </div>
       <% }) %>
     </div>
   </div>
-  <!-- Vagas Disponiveis -->
+
+  <!--* Vagas Disponiveis ========== -->
   <div class="col-12 col-md-6">
     <div class="container-block-table-vagas scroll-bar-hide shadow-lg">
       <h1>Vagas Disponiveis</h1>
@@ -94,13 +103,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  /* body {
-    background-color: #e8ecf0 !important;
-  } */
-
-  li {
-    color: #eff4ee;
-  }
-</style>

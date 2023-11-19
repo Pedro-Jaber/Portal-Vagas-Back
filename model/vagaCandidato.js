@@ -57,7 +57,19 @@ candidatoParticiparDeVaga = async (idCandidato, idVaga) => {
   }
 };
 
+candidatoSaiDeVaga = async (idCandidato, idVaga) => {
+  try {
+    const candidatoSaiVaga = await VagaCandidato.destroy({
+      where: {
+        idCandidato,
+        idVaga,
+      },
+    });
+  } catch (error) {}
+};
+
 module.exports = {
   VagaCandidato,
   candidatoParticiparDeVaga,
+  candidatoSaiDeVaga,
 };

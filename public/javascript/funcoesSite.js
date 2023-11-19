@@ -42,3 +42,20 @@ function candidatar(candidatoID, vagaID) {
     window.location.reload();
   });
 }
+
+function descandidatar(candidatoID, vagaID) {
+  const info = {
+    candidatoID,
+    vagaID,
+  };
+
+  fetch("/relations/descandidatar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(info),
+  }).then((data) => {
+    window.location.reload();
+  });
+}
