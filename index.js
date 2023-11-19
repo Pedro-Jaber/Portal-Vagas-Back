@@ -33,8 +33,6 @@ app.use(expressLayouts);
 app.set("layout", "layouts/main");
 app.set("view engine", "ejs");
 
-//* Dotenv
-
 //* Routes
 app.get("*", checkUser);
 app.get(["/", "/home"], (req, res) =>

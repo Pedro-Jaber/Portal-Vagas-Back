@@ -9,12 +9,12 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: "postgres",
-    // dialectOptions: {
-    //   ssl: {
-    //     require: true, // Set this to true to require SSL
-    //     rejectUnauthorized: false, // Set this to false if you're using self-signed certificates
-    //   },
-    // },
+    dialectOptions: {
+      ssl: {
+        require: true, // Set this to true to require SSL
+        rejectUnauthorized: false, // Set this to false if you're using self-signed certificates
+      },
+    },
   },
 ); //TODO Criar variaveis de ambiente
 
