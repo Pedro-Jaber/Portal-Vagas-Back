@@ -67,13 +67,6 @@ body {
 
   height: 500px;
   overflow: auto;
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.container-block-table-vagas::-webkit-scrollbar {
-  display: none;
 }
 
 .container-block-table-vagas h1 {
@@ -102,6 +95,14 @@ body {
 
 .div-loginG h1 {
   font-size: 70px;
+}
+
+.fit-content-w {
+  width: fit-content;
+}
+
+.fit-content-h {
+  height: fit-content;
 }
 
 .glass-look {
@@ -176,12 +177,13 @@ body {
   background-color: var(--gold);
 }
 
-.w-fit-content {
-  width: fit-content;
+.scroll-bar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.h-fit-content {
-  height: fit-content;
+.scroll-bar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 .vagas-list {

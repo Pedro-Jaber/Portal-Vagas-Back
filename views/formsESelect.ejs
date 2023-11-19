@@ -1,9 +1,9 @@
-<div class="container-block mt-5">
+<div class="container-block my-4 shadow-lg">
   <div class="mx-auto">
     <form action="/db/recebeForms" method="POST">
       <% if (tag == "representante") { %>
 
-      <legend>Formulario Representante</legend>
+      <p class="fs-3 fw-bold m-0">Formulario Representante</p>
 
       <div class="row">
         <div class="col-12 mb-3">
@@ -29,7 +29,7 @@
 
       <% } else if (tag == "vaga") { %>
 
-      <legend>Formulario Vaga</legend>
+      <p class="fs-3 fw-bold m-0">Formulario Vaga</p>
       <!-- empresa, cargaHoraria, bolsa, descricao -->
 
       <div class="row">
@@ -79,7 +79,7 @@
       </div>
 
       <% } else if (tag == "candidato") { %>
-      <legend>Formulario Candidato</legend>
+      <p class="fs-3 fw-bold m-0">Formulario Candidato</p>
       <!-- nome, email, senha, data de nascimento, CPF -->
 
       <div class="row">
@@ -209,7 +209,10 @@
   </div>
 </div>
 
-<div class="overflow-auto container-block my-5" style="max-height: 500px">
+<div
+  class="overflow-auto container-block mb-5 shadow-lg scroll-bar-hide"
+  style="max-height: 500px"
+>
   <ul class="list-group">
     <% if (tag == "representante") { %> <% data.forEach(representante => { %>
 
