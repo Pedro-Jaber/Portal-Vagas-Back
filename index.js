@@ -10,7 +10,7 @@ const { sequelize } = require("./model/dataBase");
 const candVagaRouter = require("./routers/vagaCandidato");
 const candidatoRouter = require("./routers/candidato");
 const representanteRouter = require("./routers/representante");
-const dataBaseRouter = require("./routers/bataBase");
+const dataBaseRouter = require("./routers/dataBase");
 const authRouter = require("./routers/auth");
 
 // Middlewares
