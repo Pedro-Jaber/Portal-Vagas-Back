@@ -51,7 +51,7 @@ const Candidato = dataBase.sequelize.define(
   },
 );
 
-Candidato.sync();
+Candidato.sync({ alter: true });
 
 // Cria um candidato com os argumentos passados
 criarCandidato = async (

@@ -9,6 +9,7 @@ router.route("/tests").get(controllerDB.test);
 router.route("/representante").get(controllerDB.testRepresentanteGet);
 router.route("/vaga").get(controllerDB.testVagaGet);
 router.route("/candidato").get(controllerDB.testCandidatoGet);
+router.route("/statusInint").get(controllerDB.statusInint);
 
 router.route("/recebeForms").post(controllerDB.testFormPost);
 

@@ -3,21 +3,24 @@ const dataBase = require("./dataBase");
 
 const { Vaga } = require("./vaga");
 const { Candidato } = require("./candidato");
-/*
-create table if not exists vagaCandidato (
-  id serial primary key not null,
-  id_Candidato interger not null,
-  id_Vaga interger not null,
-  statusAplicacao interger not null references statusAplicacao(id),
-  dataInicioContrato date,
-  dataFimContrato date,
-);
 
-create table if not exists  statusAplicacao (
-  id serial primary key not null,
-  status varchar(50) not null
-)
-*/
+const StatusCandidatura = dataBase.sequelize.define(
+  "statusCandidatura",
+  {
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    cor: {
+      type: DataTypes.STRING(7), //#ffffff
+      allowNull: false,
+    },
+  },
+  {
+    freezeTableName: true,
+    timestamps: false,
+  },
+);
 
 const VagaCandidato = dataBase.sequelize.define(
   "vagaCandidato",
@@ -33,15 +36,19 @@ const VagaCandidato = dataBase.sequelize.define(
   },
 );
 
+StatusCandidatura.hasMany(VagaCandidato);
+VagaCandidato.belongsTo(StatusCandidatura);
+
 Vaga.belongsToMany(Candidato, {
-  through: "vagaCandidato",
+  through: VagaCandidato,
   foreignKey: "idVaga",
 });
 Candidato.belongsToMany(Vaga, {
-  through: "vagaCandidato",
+  through: VagaCandidato,
   foreignKey: "idCandidato",
 });
 
+StatusCandidatura.sync();
 VagaCandidato.sync();
 
 candidatoParticiparDeVaga = async (idCandidato, idVaga) => {
@@ -49,6 +56,7 @@ candidatoParticiparDeVaga = async (idCandidato, idVaga) => {
     const vagaCandidato = await VagaCandidato.create({
       idCandidato,
       idVaga,
+      statusCandidaturaId: 1,
     });
 
     return vagaCandidato;
@@ -59,16 +67,20 @@ candidatoParticiparDeVaga = async (idCandidato, idVaga) => {
 
 candidatoSaiDeVaga = async (idCandidato, idVaga) => {
   try {
-    const candidatoSaiVaga = await VagaCandidato.destroy({
-      where: {
-        idCandidato,
-        idVaga,
+    const candidatoSaiVaga = await VagaCandidato.update(
+      { statusCandidaturaId: 4 },
+      {
+        where: {
+          idCandidato,
+          idVaga,
+        },
       },
-    });
+    );
   } catch (error) {}
 };
 
 module.exports = {
+  StatusCandidatura,
   VagaCandidato,
   candidatoParticiparDeVaga,
   candidatoSaiDeVaga,

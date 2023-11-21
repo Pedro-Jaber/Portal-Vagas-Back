@@ -4,6 +4,11 @@
   --cor-primaria-30: #460f9e;
   --cor-primaria-30-dark: #310b6e;
   --cor-call-for-action-10: #05aed5;
+
+  --cadastrado: #ffc107;
+  --selecionado: #198754;
+  --eliminado: #dc3545;
+  --desistiu: #6f29b1;
 }
 
 header {
@@ -53,6 +58,13 @@ body {
   border-color: var(--cor-primaria-30-dark);
 }
 
+.candidato-id {
+  background-color: #fff;
+  border-radius: 1000px;
+  border: 0px none rgba(0, 0, 0, 0);
+  padding: 1rem;
+}
+
 .container-block {
   background-color: var(--cor-neutra-60);
   border-radius: 12px;
@@ -63,6 +75,7 @@ body {
 .container-block-table-vagas {
   background-color: var(--cor-neutra-60);
   border-radius: 12px;
+  border: 0px none rgba(0, 0, 0, 0) !important;
   padding: 1rem 0;
 
   height: 500px;
@@ -95,6 +108,30 @@ body {
 
 .div-loginG h1 {
   font-size: 70px;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-cadastrado {
+  background-color: var(--cadastrado);
+}
+
+.dot-selecionado {
+  background-color: var(--selecionado);
+}
+
+.dot-eliminado {
+  background-color: var(--eliminado);
+}
+
+.dot-desistiu {
+  background-color: var(--desistiu);
 }
 
 .fit-content-w {
@@ -189,6 +226,7 @@ body {
 .vagas-list {
   border-top: 1px solid #dee2e6;
   padding: 0.5rem 1rem;
+  background-color: #00000000;
 }
 
 .vagas-list:hover {

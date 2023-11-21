@@ -1,4 +1,7 @@
-const { candidatoParticiparDeVaga } = require("../model/vagaCandidato");
+const {
+  candidatoParticiparDeVaga,
+  candidatoSaiDeVaga,
+} = require("../model/vagaCandidato");
 
 module.exports.candidatar = async (req, res) => {
   const { candidatoID, vagaID } = req.body;

@@ -2,7 +2,7 @@ const { Op } = require("sequelize");
 
 const { Candidato } = require("../model/candidato");
 const { Vaga } = require("../model/vaga");
-const { VagaCandidato } = require("../model/vagaCandidato");
+const { sequelize } = require("../model/dataBase");
 
 module.exports.homeCandidato = (req, res) => {
   res.status(200).render("candidato/homeCandidato", {
@@ -42,40 +42,48 @@ module.exports.painel = async (req, res) => {
     const candidato = await Candidato.findOne({ where: { id: user_id } });
 
     let vagasDisponiveis;
-    let vagas_CadastradasID;
     let vagasCadastradas;
 
     try {
       let vagasArray = [];
 
-      const vagas_CadastradasID = await VagaCandidato.findAll({
-        attributes: ["id", "idVaga"],
-        where: { idCandidato: user_id },
-      });
+      const query = `
+      select 
+        vc.id as "idVagaCandidato",
+        vc."createdAt",
+        v.id as "idVaga",
+        v.codigo,
+        v.empresa, 
+        v."cargaHoraria", 
+        v.bolsa,
+        v.descricao,
+        sc.status,
+        sc.cor
+      from candidato c
+      inner join "vagaCandidato" vc
+      on vc."idCandidato" = c.id
+      inner join vaga v
+      on vc."idVaga" = v.id
+      inner join "statusCandidatura" sc
+      on vc."statusCandidaturaId" = sc.id
+      where c.id = '${user_id}'
+      order by vc."createdAt" DESC`;
 
-      // console.log(vagas_CadastradasID);
+      const queryResult = await sequelize.query(query);
+      vagasCadastradas = queryResult[0];
 
-      vagas_CadastradasID.forEach((relacaoVagaCad) => {
+      vagasCadastradas.forEach((relacaoVagaCad) => {
         vagasArray.push(relacaoVagaCad.idVaga);
       });
-
-      // console.log(vagasArray);
-
-      vagasCadastradas = await Vaga.findAll({
-        where: { id: { [Op.in]: vagasArray } },
-      });
-
-      // console.log(vagasCadastradas);
 
       vagasDisponiveis = await Vaga.findAll({
         where: { id: { [Op.notIn]: vagasArray } },
       });
     } catch (error) {
-      vagasDisponiveis = ["undefined"];
-      vagas_CadastradasID = ["111"];
-      console.log(error);
+      console.error(error);
+      vagasDisponiveis = [];
+      vagasCadastradas = [];
     }
-
     res.status(200).render("candidato/painelCandidato", {
       title: candidato.nome,
       candidato,
