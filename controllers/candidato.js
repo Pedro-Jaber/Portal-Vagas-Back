@@ -72,6 +72,7 @@ module.exports.painel = async (req, res) => {
       const queryResult = await sequelize.query(query);
       vagasCadastradas = queryResult[0];
 
+      // TODO Transformar isso em uma so query no banco
       vagasCadastradas.forEach((relacaoVagaCad) => {
         vagasArray.push(relacaoVagaCad.idVaga);
       });
@@ -79,6 +80,7 @@ module.exports.painel = async (req, res) => {
       vagasDisponiveis = await Vaga.findAll({
         where: { id: { [Op.notIn]: vagasArray } },
       });
+      // TODO -----------------------------------------
     } catch (error) {
       console.error(error);
       vagasDisponiveis = [];

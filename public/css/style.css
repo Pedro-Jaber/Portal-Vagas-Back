@@ -82,7 +82,7 @@ body {
   overflow: auto;
 }
 
-.container-block-table-vagas h1 {
+.container-block-table-vagas > h1 {
   padding: 0 1rem;
 }
 
@@ -223,12 +223,12 @@ body {
   display: none;
 }
 
-.vagas-list {
+.vagas-list-item {
   border-top: 1px solid #dee2e6;
   padding: 0.5rem 1rem;
   background-color: #00000000;
 }
 
-.vagas-list:hover {
+.vagas-list-item:hover {
   background-color: rgba(0, 0, 0, 0.075);
 }

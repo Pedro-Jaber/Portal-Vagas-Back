@@ -93,8 +93,13 @@
       <h1>Vagas Cadastradas</h1>
 
       <!-- Linha START -->
-      <% vagasCadastradas.forEach( (vaga) => { %>
-      <div class="vagas-list">
+      <% vagasCadastradas.forEach( (vaga, index) => { %>
+      <!-- Item na lista -->
+      <div
+        class="vagas-list-item"
+        data-bs-toggle="modal"
+        data-bs-target="#vagaCadModal<%= index %>"
+      >
         <div class="d-flex align-items-center">
           <span class="ms-0 me-auto"><%= vaga.empresa %></span>
           <span class="me-3"><%= vaga.cargaHoraria %> h/dia</span>
@@ -127,6 +132,86 @@
           <% } %>
         </div>
       </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="vagaCadModal<%= index %>"
+        tabindex="-1"
+        aria-labelledby="vagaCadModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 fw-bold" id="vagaCadModalLabel">
+                <%= vaga.empresa %>
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <!-- Conteudo -->
+            <div class="modal-body modal-dialog-scrollable">
+              <span class="me-3 fw-bold"
+                >Código: <span class="fw-normal"><%= vaga.codigo %><br /></span
+              ></span>
+
+              <span class="me-3 fw-bold"
+                >Carga Horaria:
+                <span class="fw-normal"
+                  ><%= vaga.cargaHoraria %> h/dia <br /></span
+              ></span>
+
+              <span class="me-3 fw-bold"
+                >Varlore da bolsa:
+                <span class="fw-normal">R$<%= vaga.bolsa %> <br /></span
+              ></span>
+              <span class="me-3 fw-bold"
+                >Descrição:
+                <p class="fw-normal"><%= vaga.descricao %></p></span
+              >
+            </div>
+            <!-- Conteudo END -->
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close</button
+              ><% if (vaga.status.toLowerCase() !== "cadastrado" ) { %>
+
+              <button
+                class="btn btn-secondary px-4"
+                id="botaoCandidatar"
+                onclick="descandidatar('<%= candidato.id %>', '<%= vaga.idVaga %>')"
+                disabled
+              >
+                Sair
+              </button>
+
+              <% } else { %>
+
+              <button
+                class="btn btn-danger px-4"
+                id="botaoCandidatar"
+                onclick="descandidatar('<%= candidato.id %>', '<%= vaga.idVaga %>')"
+              >
+                Sair
+              </button>
+
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <% }) %>
       <!-- Linha END -->
     </div>
@@ -135,12 +220,15 @@
   <!--* Vagas Disponiveis ========== -->
   <div class="col-12 col-md-6">
     <div class="container-block-table-vagas scroll-bar-hide shadow-lg">
-      <div class="position-relative">
-        <h1>Vagas Disponiveis</h1>
-      </div>
+      <h1>Vagas Disponiveis</h1>
       <div class="overflow-auto">
-        <% vagasDisponiveis.forEach( vaga => { %>
-        <div class="vagas-list">
+        <% vagasDisponiveis.forEach( (vaga, index) => { %>
+        <!-- Item na lista -->
+        <div
+          class="vagas-list-item"
+          data-bs-toggle="modal"
+          data-bs-target="#vagaDispModal<%= index %>"
+        >
           <div class="d-flex align-items-center">
             <span class="ms-0 me-auto overflow-auto" style="max-width: 10rem"
               ><%= vaga.empresa %></span
@@ -156,6 +244,73 @@
             </button>
           </div>
         </div>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="vagaDispModal<%= index %>"
+          tabindex="-1"
+          aria-labelledby="vagaDispModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 fw-bold" id="vagaDispModalLabel">
+                  <%= vaga.empresa %>
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <!-- Conteudo -->
+              <div class="modal-body modal-dialog-scrollable">
+                <span class="me-3 fw-bold"
+                  >Código:
+                  <span class="fw-normal"><%= vaga.codigo %><br /></span
+                ></span>
+
+                <span class="me-3 fw-bold"
+                  >Carga Horaria:
+                  <span class="fw-normal"
+                    ><%= vaga.cargaHoraria %> h/dia <br /></span
+                ></span>
+
+                <span class="me-3 fw-bold"
+                  >Varlore da bolsa:
+                  <span class="fw-normal">R$<%= vaga.bolsa %> <br /></span
+                ></span>
+                <span class="me-3 fw-bold"
+                  >Descrição:
+                  <p class="fw-normal"><%= vaga.descricao %></p></span
+                >
+              </div>
+              <!-- Conteudo END -->
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  class="btn btn-success px-4"
+                  id="botaoCandidatar"
+                  onclick="candidatar('<%= candidato.id %>', '<%= vaga.id %>')"
+                >
+                  candidatar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <% }) %>
       </div>
     </div>
