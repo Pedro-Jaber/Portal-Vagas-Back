@@ -44,9 +44,12 @@ module.exports.painel = async (req, res) => {
     let vagasDisponiveis;
     let vagasCadastradas;
 
+    // TODO Refatorar
     try {
       let vagasArray = [];
 
+      // TODO Transformar em uma função do modelo
+      // Retorna todas as vagas em que o candidato está cadastrado
       const query = `
       select 
         vc.id as "idVagaCandidato",
@@ -72,7 +75,9 @@ module.exports.painel = async (req, res) => {
       const queryResult = await sequelize.query(query);
       vagasCadastradas = queryResult[0];
 
+      // TODO Transformar em uma função do modelo
       // TODO Transformar isso em uma so query no banco
+      // Retorna todas as vagas em que o candidato NÂO está cadastrado
       vagasCadastradas.forEach((relacaoVagaCad) => {
         vagasArray.push(relacaoVagaCad.idVaga);
       });
