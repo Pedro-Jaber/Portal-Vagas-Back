@@ -1,14 +1,16 @@
-<script>
-  //TODO Melhorar página do representante e estilizar
-  //TODO Permitir a edição dos dados do representante no painel do representante
-</script>
+<!-- TODO Permitir a edição dos dados do representante -->
 
-<li class="list-group-item py-4">
+<!-- Perfil -->
+<div class="container-block my-4 shadow-lg">
   <div class="d-flex mb-2">
-    <p class="text-capitalize fs-3 fw-bold m-0"><%= representante.nome %></p>
-    <span class="d-flex font-monospace align-items-center me-0 ms-auto"
-      ><%= representante.id %>
-    </span>
+    <div>
+      <p class="text-capitalize fs-3 fw-bold m-0"><%= representante.nome %></p>
+    </div>
+    <div class="me-0 ms-auto">
+      <span class="d-flex font-monospace align-items-center id-pill py-0 px-2"
+        ><%= representante.id %>
+      </span>
+    </div>
   </div>
 
   <div class="d-flex">
@@ -35,4 +37,90 @@
     <p class="fw-bold m-0">Ultima atualização:</p>
     <span class="ms-1"><%= representante.updatedAt.toString() %></span>
   </div>
-</li>
+</div>
+
+<!-- Vagas -->
+<div class="row mb-5">
+  <!--* Vagas Criadas ========== -->
+  <div class="col">
+    <div class="container-block-table-vagas scroll-bar-hide shadow-lg">
+      <h1>Vagas Criadas</h1>
+
+      <!-- Linha START -->
+      <% vagasCriadasLista.forEach( (vaga, index) => { %>
+      <!-- Item na lista -->
+      <div
+        class="vagas-list-item"
+        data-bs-toggle="modal"
+        data-bs-target="#vagaCadModal<%= index %>"
+      >
+        <div class="d-flex align-items-center">
+          <span class="ms-0 me-auto"><%= vaga.empresa %></span>
+          <span class="me-3"><%= vaga.cargaHoraria %> h/dia</span>
+          <span class="me-3">R$<%= vaga.bolsa %></span>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="vagaCadModal<%= index %>"
+        tabindex="-1"
+        aria-labelledby="vagaCadModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 fw-bold" id="vagaCadModalLabel">
+                <%= vaga.empresa %>
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <!-- Conteudo -->
+            <div class="modal-body modal-dialog-scrollable">
+              <span class="me-3 fw-bold"
+                >Código: <span class="fw-normal"><%= vaga.codigo %><br /></span
+              ></span>
+
+              <span class="me-3 fw-bold"
+                >Carga Horaria:
+                <span class="fw-normal"
+                  ><%= vaga.cargaHoraria %> h/dia <br /></span
+              ></span>
+
+              <span class="me-3 fw-bold"
+                >Varlore da bolsa:
+                <span class="fw-normal">R$<%= vaga.bolsa %> <br /></span
+              ></span>
+              <span class="me-3 fw-bold"
+                >Descrição:
+                <p class="fw-normal"><%= vaga.descricao %></p></span
+              >
+            </div>
+            <!-- Conteudo END -->
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% }) %>
+      <!-- Linha END -->
+    </div>
+  </div>
+</div>

@@ -1,4 +1,18 @@
 const { Representante } = require("../model/representante");
+const { Vaga } = require("../model/vaga");
+
+vagasCriadas = async (representanteId) => {
+  console.log(representanteId);
+  try {
+    const vagasCriadas = await Vaga.findAll({
+      where: { representanteId },
+    });
+
+    return vagasCriadas;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 module.exports.homeRepresentante = (req, res) => {
   res.status(200).render("representante/homeRepresentante", {
@@ -47,9 +61,12 @@ module.exports.painel = async (req, res) => {
       where: { id: user_id },
     });
 
+    const vagasCriadasLista = await vagasCriadas(user_id);
+
     res.status(200).render("representante/painelRepresentante", {
       title: representante.nome,
       representante,
+      vagasCriadasLista,
     });
   } catch (error) {
     res.redirect("/404");

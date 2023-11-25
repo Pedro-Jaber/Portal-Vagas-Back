@@ -1,6 +1,8 @@
 const { DataTypes } = require("sequelize");
 const dataBase = require("./dataBase");
 
+const { Representante } = require("./representante");
+
 /* 
 Vaga {
 	id,
@@ -50,6 +52,9 @@ const Vaga = dataBase.sequelize.define(
     freezeTableName: true,
   },
 );
+
+Representante.hasMany(Vaga);
+Vaga.belongsTo(Representante);
 
 Vaga.sync();
 
