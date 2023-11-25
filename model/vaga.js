@@ -32,6 +32,7 @@ const Vaga = dataBase.sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: false,
     },
+    // TODO incluir localização
     cargaHoraria: {
       type: DataTypes.INTEGER,
       allowNull: false,
