@@ -58,8 +58,9 @@ body {
   border-color: var(--cor-primaria-30-dark);
 }
 
-.candidato-id {
-  background-color: #fff;
+.id-pill {
+  background-color: #198754;
+  color: #fff;
   border-radius: 1000px;
   border: 0px none rgba(0, 0, 0, 0);
   padding: 1rem;
