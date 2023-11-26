@@ -1,11 +1,11 @@
 const { Representante } = require("../model/representante");
-const { Vaga } = require("../model/vaga");
+const { Vaga, criarVaga } = require("../model/vaga");
 
 vagasCriadas = async (representanteId) => {
-  console.log(representanteId);
   try {
     const vagasCriadas = await Vaga.findAll({
       where: { representanteId },
+      order: [["createdAt", "DESC"]],
     });
 
     return vagasCriadas;
@@ -70,5 +70,17 @@ module.exports.painel = async (req, res) => {
     });
   } catch (error) {
     res.redirect("/404");
+  }
+};
+
+// TODO lidar com erros e tratar a entrada do usurário
+module.exports.criarVaga = async (req, res) => {
+  const { empresa, cargaHoraria, bolsa, descricao, representanteId } = req.body;
+
+  try {
+    criarVaga(empresa, cargaHoraria, bolsa, descricao, representanteId);
+    res.status(200).json({ mensagem: "ok" });
+  } catch (error) {
+    res.status(500).send("500 Internal Server Error: " + error);
   }
 };

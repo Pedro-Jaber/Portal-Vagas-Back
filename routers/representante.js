@@ -20,5 +20,7 @@ router
 router
   .route(["/painel/:user_id", "/painel/"])
   .get(canViewPanel, controllerRepr.painel);
+// TODO Permitir apenas representante logado de acessar essa página
+router.route("/criar-vaga").post(controllerRepr.criarVaga);
 
 module.exports = router;

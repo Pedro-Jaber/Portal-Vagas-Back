@@ -61,13 +61,20 @@ Vaga.sync();
 //Função para criar uma vaga no Banco de Dados
 // Recebe o nome da empresa, o tempo de trabalho por dia, o valor da bolsa por mês e a descrição do que deve ser realizado
 //TODO deve receber o código da empresa uma FK
-criarVaga = async (empresa, cargaHoraria, bolsa, descricao) => {
+criarVaga = async (
+  empresa,
+  cargaHoraria,
+  bolsa,
+  descricao,
+  representanteId,
+) => {
   try {
     const vaga = Vaga.create({
       empresa,
       cargaHoraria,
       bolsa,
       descricao,
+      representanteId,
     });
 
     return vaga;

@@ -1,6 +1,6 @@
 <!-- TODO Permitir a edição dos dados do representante -->
 
-<!-- Perfil -->
+<!--* Perfil -->
 <div class="container-block my-4 shadow-lg">
   <div class="d-flex mb-2">
     <div>
@@ -39,10 +39,72 @@
   </div>
 </div>
 
-<!-- Vagas -->
 <div class="row mb-5">
-  <!--* Vagas Criadas ========== -->
-  <div class="col">
+  <!--* Fomulário pra criar vagas -->
+  <div class="col-6">
+    <div class="container-block-table-vagas shadow-lg">
+      <h1>Formulario Vaga</h1>
+      <form id="formularioVaga" class="px-3">
+        <div class="row">
+          <div class="col-6 mb-3">
+            <!-- TODO Trocar para código da empresa -->
+            <label for="inputEmpresa" class="form-label">Empresa</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputEmpresa"
+              name="empresa"
+            />
+          </div>
+
+          <div class="col-6 mb-3">
+            <label for="inputCargaHoraria" class="form-label"
+              >Carga Horaria Diaria</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="inputCargaHoraria"
+              name="cargaHoraria"
+            />
+          </div>
+
+          <div class="col-6 mb-3">
+            <label for="inputBolsa" class="form-label">Valor da Bolsa</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputBolsa"
+              name="bolsa"
+            />
+          </div>
+
+          <div class="col-12 mb-3">
+            <label for="inputDercricao" class="form-label">Descrição</label>
+            <textarea
+              class="form-control"
+              id="inputDercricao"
+              name="descricao"
+              rows="4"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="visually-hidden">
+          <input
+            type="text"
+            id="representanteId"
+            name="representanteId"
+            value="<%= representante.id %>"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary px-3">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <!--* Vagas -->
+  <div class="col-6">
     <div class="container-block-table-vagas scroll-bar-hide shadow-lg">
       <h1>Vagas Criadas</h1>
 

@@ -1,5 +1,6 @@
 let contadorInput = 1;
 
+// TODO transformar em addEventListener
 // Adiciona mais um campo de habilidade no formulário
 function addHabilidade() {
   contadorInput++;
@@ -26,6 +27,7 @@ function addHabilidade() {
   divHabilidadesInput.appendChild(novaHabilidade);
 }
 
+// TODO transformar em addEventListener
 function candidatar(candidatoID, vagaID) {
   const info = {
     candidatoID,
@@ -43,6 +45,7 @@ function candidatar(candidatoID, vagaID) {
   });
 }
 
+// TODO transformar em addEventListener
 function descandidatar(candidatoID, vagaID) {
   const info = {
     candidatoID,
@@ -59,3 +62,39 @@ function descandidatar(candidatoID, vagaID) {
     window.location.reload();
   });
 }
+
+function criarVaga(empresa, cargaHoraria, bolsa, descricao, representanteId) {
+  const info = {
+    empresa,
+    cargaHoraria,
+    bolsa,
+    descricao,
+    representanteId,
+  };
+
+  fetch("/representante/criar-vaga", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(info),
+  }).then((data) => {
+    window.location.reload();
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const formulario = document.getElementById("formularioVaga");
+
+  formulario.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const empresa = document.getElementById("inputEmpresa").value;
+    const cargaHoraria = document.getElementById("inputCargaHoraria").value;
+    const bolsa = document.getElementById("inputBolsa").value;
+    const descricao = document.getElementById("inputDercricao").value;
+    const representanteId = document.getElementById("representanteId").value;
+    criarVaga(empresa, cargaHoraria, bolsa, descricao, representanteId);
+  });
+
+  console.log(formulario);
+});
