@@ -1,13 +1,20 @@
 const { Representante } = require("../model/representante");
 const { Vaga, criarVaga } = require("../model/vaga");
+const { Candidato } = require("../model/candidato");
 
 vagasCriadas = async (representanteId) => {
   try {
     const vagasCriadas = await Vaga.findAll({
       where: { representanteId },
       order: [["createdAt", "DESC"]],
+      include: [
+        {
+          model: Candidato,
+        },
+      ],
     });
 
+    console.log(vagasCriadas);
     return vagasCriadas;
   } catch (error) {
     console.error(error);

@@ -165,6 +165,13 @@
                 >Descrição:
                 <p class="fw-normal"><%= vaga.descricao %></p></span
               >
+              <div id="candidatosLista">
+                <% vaga.candidatos.forEach( (candidato) => { %>
+                <div class="candidatos-list-item">
+                  <span><%= candidato.nome %></span>
+                </div>
+                <% }) %>
+              </div>
             </div>
             <!-- Conteudo END -->
 
