@@ -58,14 +58,6 @@ body {
   border-color: var(--cor-primaria-30-dark);
 }
 
-.id-pill {
-  background-color: #198754;
-  color: #fff;
-  border-radius: 1000px;
-  border: 0px none rgba(0, 0, 0, 0);
-  padding: 1rem;
-}
-
 .container-block {
   background-color: var(--cor-neutra-60);
   border-radius: 12px;
@@ -149,6 +141,14 @@ body {
   border-right: 1px solid rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+.id-pill {
+  background-color: #198754;
+  color: #fff;
+  border-radius: 1000px;
+  border: 0px none rgba(0, 0, 0, 0);
+  padding: 1rem;
 }
 
 .img-em-construcao {
