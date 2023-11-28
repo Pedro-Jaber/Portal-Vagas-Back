@@ -157,7 +157,7 @@ body {
   color: #fff;
   border-radius: 1000px;
   border: 0px none rgba(0, 0, 0, 0);
-  padding: 1rem;
+  padding: 0rem 0.5rem;
 }
 
 .img-em-construcao {
@@ -222,6 +222,31 @@ body {
 
 .pagina-em-contrucao {
   background-color: var(--gold);
+}
+
+.pill {
+  background-color: #797979;
+  color: #fff;
+  border-radius: 20px;
+  display: inline-block;
+  padding: 0rem 0.5rem;
+  font-weight: bold;
+}
+
+.pill-cadastrado {
+  background-color: var(--cadastrado);
+}
+
+.pill-selecionado {
+  background-color: var(--selecionado);
+}
+
+.pill-eliminado {
+  background-color: var(--eliminado);
+}
+
+.pill-desistiu {
+  background-color: var(--desistiu);
 }
 
 .scroll-bar-hide {

@@ -7,7 +7,7 @@
       <p class="text-capitalize fs-3 fw-bold m-0"><%= representante.nome %></p>
     </div>
     <div class="me-0 ms-auto">
-      <span class="d-flex font-monospace align-items-center id-pill py-0 px-2"
+      <span class="d-flex font-monospace align-items-center id-pill"
         ><%= representante.id %>
       </span>
     </div>
@@ -147,6 +147,8 @@
 
             <!-- Conteudo -->
             <div class="modal-body modal-dialog-scrollable">
+              <span class="ms-auto me-0 id-pill"><%= vaga.id %><br /></span>
+
               <span class="me-3 fw-bold"
                 >Código: <span class="fw-normal"><%= vaga.codigo %><br /></span
               ></span>
@@ -168,7 +170,111 @@
               <div id="candidatosLista">
                 <% vaga.candidatos.forEach( (candidato) => { %>
                 <div class="candidatos-list-item">
-                  <span><%= candidato.nome %></span>
+                  <div class="d-flex align-items-center">
+                    <span class="ms-0"><%= candidato.nome %></span>
+                    <!--  -->
+                    <div class="ms-auto me-1">
+                      <% if (candidato.vagaCandidato.statusCandidaturaId === 1)
+                      { %><span class="pill pill-cadastrado">Cadastrado</span><%
+                      } %> <% if (candidato.vagaCandidato.statusCandidaturaId
+                      === 2) { %><span class="pill pill-selecionado"
+                        >Selecionado</span
+                      ><% } %> <% if
+                      (candidato.vagaCandidato.statusCandidaturaId === 3) {
+                      %><span class="pill pill-eliminado">Eliminado</span><% }
+                      %> <% if (candidato.vagaCandidato.statusCandidaturaId ===
+                      4) { %><span class="pill pill-desistiu">Desistiu</span><%
+                      } %>
+                    </div>
+                    <div class="d-flex me-0">
+                      <% if (candidato.vagaCandidato.statusCandidaturaId === 4)
+                      { %>
+                      <!-- Selecionar -->
+                      <button
+                        title="Selecionar"
+                        type="button"
+                        class="btn btn-secondary d-flex align-items-center rounded-start-4 rounded-end-0 mx-0"
+                        onclick="selecionarCandidatoJS('<%= vaga.id %>', '<%= candidato.id %>')"
+                        disabled
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-check-lg"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022"
+                          />
+                        </svg>
+                      </button>
+                      <!-- Eliminar -->
+                      <button
+                        title="Eliminar"
+                        type="button"
+                        class="btn btn-secondary d-flex align-items-center rounded-start-0 rounded-end-4 mx-0"
+                        onclick="eliminarCandidatoJS('<%= vaga.id %>', '<%= candidato.id %>')"
+                        disabled
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-x-lg"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                          />
+                        </svg>
+                      </button>
+                      <% } else { %>
+                      <!-- Selecionar -->
+                      <button
+                        title="Selecionar"
+                        type="button"
+                        class="btn btn-success d-flex align-items-center rounded-start-4 rounded-end-0 mx-0"
+                        onclick="selecionarCandidatoJS('<%= vaga.id %>', '<%= candidato.id %>')"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-check-lg"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022"
+                          />
+                        </svg>
+                      </button>
+                      <!-- Eliminar -->
+                      <button
+                        title="Eliminar"
+                        type="button"
+                        class="btn btn-danger d-flex align-items-center rounded-start-0 rounded-end-4 mx-0"
+                        onclick="eliminarCandidatoJS('<%= vaga.id %>', '<%= candidato.id %>')"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-x-lg"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                          />
+                        </svg>
+                      </button>
+                      <% } %>
+                    </div>
+                  </div>
                 </div>
                 <% }) %>
               </div>

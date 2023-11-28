@@ -83,6 +83,42 @@ function criarVaga(empresa, cargaHoraria, bolsa, descricao, representanteId) {
   });
 }
 
+function selecionarCandidatoJS(vagaId, candidatoId) {
+  // alert(`Candidato Selecionado ${vagaId} ${candidatoId}`);
+  const info = {
+    vagaId,
+    candidatoId,
+  };
+
+  fetch("/representante/selecionar-candidato", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(info),
+  }).then((data) => {
+    window.location.reload();
+  });
+}
+
+function eliminarCandidatoJS(vagaId, candidatoId) {
+  // alert(`Candidato Eliminado ${vagaId} ${candidatoId}`);
+  const info = {
+    vagaId,
+    candidatoId,
+  };
+
+  fetch("/representante/eliminar-candidato", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(info),
+  }).then((data) => {
+    window.location.reload();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const formulario = document.getElementById("formularioVaga");
 

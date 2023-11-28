@@ -47,6 +47,18 @@ Candidato.belongsToMany(Vaga, {
   through: VagaCandidato,
   foreignKey: "idCandidato",
 });
+Vaga.hasMany(VagaCandidato, {
+  foreignKey: "idVaga",
+});
+VagaCandidato.belongsTo(Vaga, {
+  foreignKey: "idVaga",
+});
+Candidato.hasMany(VagaCandidato, {
+  foreignKey: "idCandidato",
+});
+VagaCandidato.belongsTo(Candidato, {
+  foreignKey: "idCandidato",
+});
 
 StatusCandidatura.sync();
 VagaCandidato.sync();
@@ -76,7 +88,41 @@ candidatoSaiDeVaga = async (idCandidato, idVaga) => {
         },
       },
     );
-  } catch (error) {}
+  } catch (error) {
+    return err;
+  }
+};
+
+selecionarCandidato = async (idVaga, idCandidato) => {
+  try {
+    const selecionarCandidato = await VagaCandidato.update(
+      { statusCandidaturaId: 2 },
+      {
+        where: {
+          idCandidato,
+          idVaga,
+        },
+      },
+    );
+  } catch (error) {
+    return err;
+  }
+};
+
+eliminarCandidato = async (idVaga, idCandidato) => {
+  try {
+    const eliminarCandidato = await VagaCandidato.update(
+      { statusCandidaturaId: 3 },
+      {
+        where: {
+          idCandidato,
+          idVaga,
+        },
+      },
+    );
+  } catch (error) {
+    return err;
+  }
 };
 
 module.exports = {
@@ -84,4 +130,6 @@ module.exports = {
   VagaCandidato,
   candidatoParticiparDeVaga,
   candidatoSaiDeVaga,
+  selecionarCandidato,
+  eliminarCandidato,
 };
